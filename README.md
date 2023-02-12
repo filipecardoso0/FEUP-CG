@@ -1,10 +1,10 @@
 # CG 2022/2023
 
-## Group T0xG0y
+## Group T05G05
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| João Paulo Moreira Araújo         | 202004293 | up202004293@edu.fe.up.pt                |
+| Alexandre Guimarães Gomes Correia          | 202007042 | up202007042@edu.fe.up.pt                |
 
 ----
 
