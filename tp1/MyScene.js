@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyParallelogram } from "./MyParallelogram.js";
+import { MyTriangleSmall } from "./MyTriangleSmall.js";
 
 /**
  * MyScene
@@ -30,12 +31,14 @@ export class MyScene extends CGFscene {
     this.diamond = new MyDiamond(this);
     this.triangle = new MyTriangle(this);
     this.parallelogram = new MyParallelogram(this);
+    this.triangleSmall = new MyTriangleSmall(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayTriangle = false;
-    this.displayParallelogram = false;
+    this.displayParallelogram = true;
     this.displayDiamond = true;
+    this.displayTriangleSmall = true;
     this.scaleFactor = 1;
 
   }
@@ -58,6 +61,30 @@ export class MyScene extends CGFscene {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
+    this.setShininess(10.0);
+  }
+  setYellowAppearance(){
+    this.setAmbient(0.6, 0.6, 0, 1.0);
+    this.setDiffuse(0.6, 0.6, 0, 1.0);
+    this.setSpecular(0.6, 0.6, 0, 1.0);
+    this.setShininess(10.0);
+  }
+  setPinkAppearance(){
+    this.setAmbient(1, 0.4, 0.4, 1.0);
+    this.setDiffuse(1, 0.4, 0.4, 1.0);
+    this.setSpecular(1, 0.4, 0.4, 1.0);
+    this.setShininess(10.0);
+  }
+  setGreenAppearance(){
+    this.setAmbient(0, 0.6, 0, 1.0);
+    this.setDiffuse(0, 0.6, 0, 1.0);
+    this.setSpecular(0, 0.6, 0, 1.0);
+    this.setShininess(10.0);
+  }
+  setRedApearance(){
+    this.setAmbient(0.8, 0.1, 0, 1.0);
+    this.setDiffuse(0.8, 0.1, 0, 1.0);
+    this.setSpecular(0.8, 0.1, 0, 1.0);
     this.setShininess(10.0);
   }
   display() {
@@ -99,11 +126,17 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
+    this.setGreenAppearance();
     if (this.displayDiamond) this.diamond.display();
 
+    this.setPinkAppearance();
     if (this.displayTriangle) this.triangle.display();
     
+    this.setYellowAppearance();
     if (this.displayParallelogram) this.parallelogram.display();
+
+    this.setRedApearance();
+    if (this.displayTriangleSmall) this.triangleSmall.display();
 
     // ---- END Primitive drawing section
   }
