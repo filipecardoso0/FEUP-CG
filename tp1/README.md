@@ -1,12 +1,13 @@
 # CG 2022/2023
 
-## Group T0xG0y
+## Group T05G05
 
 ## TP 1 Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
+- In exercise 1, we noticed that displaying multiple objects at once (or even alternating between them) wasn't that hard, in fact, it was quite intuitive with the diamond example.
 
-- In exercise 1 we observed X
+![Screenshot 1](screenshots/cg-t05g05-tp1-1-a.png)
+
+![Screenshot 2](screenshots/cg-t05g05-tp1-1-b.png)
+
 - In exercise 2 we had difficulties in Y
-
-![Screenshot 1](screenshots/cg-t0xgxx-tp1-n.png)
