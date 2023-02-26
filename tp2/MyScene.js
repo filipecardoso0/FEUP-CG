@@ -43,6 +43,9 @@ export class MyScene extends CGFscene {
     this.displayTriangleSmall = false;
     this.displayTriangleBig = false;
     this.scaleFactor = 1;
+    this.diamond_Tx = -3;
+    this.diamond_Ty = -1;
+    this.diamond_Tz = 0;
 
   }
   initLights() {
@@ -106,17 +109,48 @@ export class MyScene extends CGFscene {
 
     this.setDefaultAppearance();
 
-    var sca = [
+    // Default object Matrix scale values
+
+    var default_scale = [
       this.scaleFactor, 0.0, 0.0, 0.0, 
       0.0, this.scaleFactor, 0.0, 0.0, 
       0.0, 0.0, this.scaleFactor, 0.0, 
       0.0, 0.0, 0.0, 1.0,
     ];
 
-    this.multMatrix(sca);
+    // Matrix rotation values
+    var angle = Math.PI/4.0;  
+
+    var matrix_rotate = [
+      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
+      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    // Matrix translation values
+
+    //var T_x = -3.0;
+    //var T_y = -1.0;
+    //var T_z = 0.0;
+
+    var matrix_translate = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      this.diamond_Tx, this.diamond_Ty, this.diamond_Tz, 1.0, 
+    ];
+
+
+    this.multMatrix(default_scale);
+    this.multMatrix(matrix_rotate);
+    this.multMatrix(matrix_translate);
+
+    this.setGreenAppearance();
+    if (this.displayDiamond) this.diamond.display();
 
     // ---- BEGIN Primitive drawing section
-
+    /*
     this.setGreenAppearance();
     if (this.displayDiamond) this.diamond.display();
 
@@ -131,7 +165,7 @@ export class MyScene extends CGFscene {
 
     this.setDefaultAppearance();
     if (this.displayTriangleBig) this.triangleBig.display();
-
+    */
     // ---- END Primitive drawing section
   }
 }
