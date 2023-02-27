@@ -1,9 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
-import { MyDiamond } from "./MyDiamond.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { MyParallelogram } from "./MyParallelogram.js";
-import { MyTriangleSmall } from "./MyTriangleSmall.js";
-import { MyTriangleBig } from "./MyTriangleBig.js";
+import { MyTangram } from "./MyTangram.js";
 
 /**
  * MyScene
@@ -29,19 +25,13 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
-    this.redTriangle = new MyTriangleSmall(this);
-    this.purpleTriangle = new MyTriangleSmall(this);
-    this.pinkTriangle = new MyTriangle(this);
-    this.orangeTriangle = new MyTriangleBig(this);
-    this.blueTriangle = new MyTriangleBig(this);
-    this.yellowParallelogram = new MyParallelogram(this);
+    this.tangram = new MyTangram(this)
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
-    this.diamond_Tx = -3;
-    this.diamond_Ty = 1.5;
+    this.diamond_Tx = 0;
+    this.diamond_Ty = 0;
     this.diamond_Tz = 0;
 
   }
@@ -113,11 +103,9 @@ export class MyScene extends CGFscene {
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
+    this.setDefaultAppearance();
     // Draw axis
     if (this.displayAxis) this.axis.display();
-
-    this.setDefaultAppearance();
-
     // Default object Matrix scale values
 
     var default_scale = [
@@ -128,257 +116,7 @@ export class MyScene extends CGFscene {
     ];
 
     this.multMatrix(default_scale);
-    this.pushMatrix();
 
-    ///// Diamond 
-
-    // Matrix rotation values
-    var angle = Math.PI/4.0;  
-
-    var matrix_rotate = [
-      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
-      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      0.0, 0.0, 0.0, 1.0,
-    ];
-
-    // Matrix translation values
-    var T_x = -3.0;
-    var T_y = 1.5;
-    var T_z = 0.0;
-
-    var matrix_translate = [
-      1.0, 0.0, 0.0, 0.0, 
-      0.0, 1.0, 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      T_x, T_y, T_z, 1.0, 
-    ];
-
-    this.multMatrix(matrix_translate);
-    this.multMatrix(matrix_rotate);
-
-    this.setGreenAppearance();
-    this.diamond.display();
-
-    ////////
-
-    this.popMatrix();
-    this.pushMatrix();
-
-    ///// Red Triangle
-
-    // Matrix rotation values
-    angle = 3*Math.PI/4.0;  
-
-    matrix_rotate = [
-      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
-      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      0.0, 0.0, 0.0, 1.0,
-    ];
-
-    // Matrix translation values
-    T_x = -4.4;
-    T_y = 1.5;
-    T_z = 0.0;
-
-    matrix_translate = [
-      1.0, 0.0, 0.0, 0.0, 
-      0.0, 1.0, 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      T_x, T_y, T_z, 1.0, 
-    ];
-
-    this.multMatrix(matrix_translate);
-    this.multMatrix(matrix_rotate);
-
-    this.setRedApearance();
-    this.redTriangle.display();
-
-    ////////
-
-    this.popMatrix();
-    this.pushMatrix();
-
-    ///// Purple Triangle
-    
-    // Matrix rotation values
-    var angle = Math.PI;  
-
-    var matrix_rotate = [
-      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
-      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      0.0, 0.0, 0.0, 1.0,
-    ];
-
-    // Matrix translation values
-    T_x = -4.7;
-    T_y = 2.2;
-    T_z = 0.0;
-
-    matrix_translate = [
-      1.0, 0.0, 0.0, 0.0, 
-      0.0, 1.0, 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      T_x, T_y, T_z, 1.0, 
-    ];
-
-    this.multMatrix(matrix_translate);
-    this.multMatrix(matrix_rotate);
-
-    this.setPurpleApearance();
-    this.purpleTriangle.display();
-
-    ////////
-
-    this.popMatrix();
-    this.pushMatrix();
-
-    ///// Pink Triangle
-    
-    // Matrix rotation values
-    angle = 0.0;  
-
-    matrix_rotate = [
-      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
-      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      0.0, 0.0, 0.0, 1.0,
-    ];
-
-    // Matrix translation values
-    T_x = -1.3;
-    T_y = 1.2;
-    T_z = 0.0;
-
-    matrix_translate = [
-      1.0, 0.0, 0.0, 0.0, 
-      0.0, 1.0, 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      T_x, T_y, T_z, 1.0, 
-    ];
-
-    this.multMatrix(matrix_translate);
-    this.multMatrix(matrix_rotate);
-
-    this.setPinkAppearance();
-    this.pinkTriangle.display();
-
-    ////////
-
-    this.popMatrix();
-    this.pushMatrix();
-
-    ///// Pink Triangle
-    
-    // Matrix rotation values
-    angle = Math.PI;  
-
-    matrix_rotate = [
-      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
-      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      0.0, 0.0, 0.0, 1.0,
-    ];
-
-    // Matrix translation values
-    T_x = -0.3;
-    T_y = 0.2;
-    T_z = 0.0;
-
-    matrix_translate = [
-      1.0, 0.0, 0.0, 0.0, 
-      0.0, 1.0, 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      T_x, T_y, T_z, 1.0, 
-    ];
-
-    this.multMatrix(matrix_translate);
-    this.multMatrix(matrix_rotate);
-
-    this.setOrangeAppearance();
-    this.orangeTriangle.display();
-
-    ////////
-    
-    this.popMatrix();
-    this.pushMatrix();
-
-    ///// Pink Triangle
-    
-    // Matrix rotation values
-    angle = 0.0;  
-
-    matrix_rotate = [
-      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
-      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      0.0, 0.0, 0.0, 1.0,
-    ];
-
-    // Matrix translation values
-    T_x = 2.0;
-    T_y = 0.2;
-    T_z = 0.0;
-
-    matrix_translate = [
-      1.0, 0.0, 0.0, 0.0, 
-      0.0, 1.0, 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      T_x, T_y, T_z, 1.0, 
-    ];
-
-    this.multMatrix(matrix_translate);
-    this.multMatrix(matrix_rotate);
-
-    this.setDefaultAppearance();
-    this.blueTriangle.display();
-
-    ////////
-    
-    this.popMatrix();
-    this.pushMatrix();
-
-    ///// Yellow Parallelogram
-    
-    // Matrix rotation values
-    angle = Math.PI;  
-
-    matrix_rotate = [
-      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
-      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      0.0, 0.0, 0.0, 1.0,
-    ];
-
-    // Matrix translation values
-    T_x = 5.0;
-    T_y = -0.8;
-    T_z = 0.0;
-
-    matrix_translate = [
-      1.0, 0.0, 0.0, 0.0, 
-      0.0, 1.0, 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      T_x, T_y, T_z, 1.0, 
-    ];
-
-    this.multMatrix(matrix_translate);
-    this.multMatrix(matrix_rotate);
-
-    var matrix_reflect = [
-      1.0, 0.0, 0.0, 0.0, 
-      0.0, -1.0, 0.0, 0.0, 
-      0.0, 0.0, 1.0, 0.0, 
-      0.0, 0.0, 0.0, 1.0,
-    ];
-
-    this.multMatrix(matrix_reflect);
-
-    this.setYellowAppearance();
-    this.yellowParallelogram.display();
-
-    ////////
+    this.tangram.display();
   }
 }
