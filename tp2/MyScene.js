@@ -30,21 +30,18 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
-    this.parallelogram = new MyParallelogram(this);
-    this.triangleSmall = new MyTriangleSmall(this);
-    this.triangleBig = new MyTriangleBig(this);
+    this.redTriangle = new MyTriangleSmall(this);
+    this.purpleTriangle = new MyTriangleSmall(this);
+    this.pinkTriangle = new MyTriangle(this);
+    this.orangeTriangle = new MyTriangleBig(this);
+    this.blueTriangle = new MyTriangleBig(this);
+    this.yellowParallelogram = new MyParallelogram(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.displayTriangle = false;
-    this.displayParallelogram = false;
-    this.displayDiamond = true;
-    this.displayTriangleSmall = false;
-    this.displayTriangleBig = false;
     this.scaleFactor = 1;
     this.diamond_Tx = -3;
-    this.diamond_Ty = -1;
+    this.diamond_Ty = 1.5;
     this.diamond_Tz = 0;
 
   }
@@ -75,6 +72,12 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.6, 0.6, 0, 1.0);
     this.setShininess(10.0);
   }
+  setOrangeAppearance(){
+    this.setAmbient(0.8, 0.5, 0, 1.0);
+    this.setDiffuse(0.8, 0.5, 0, 1.0);
+    this.setSpecular(0.8, 0.5, 0, 1.0);
+    this.setShininess(10.0);
+  }
   setPinkAppearance(){
     this.setAmbient(1, 0.4, 0.4, 1.0);
     this.setDiffuse(1, 0.4, 0.4, 1.0);
@@ -91,6 +94,12 @@ export class MyScene extends CGFscene {
     this.setAmbient(0.8, 0.1, 0, 1.0);
     this.setDiffuse(0.8, 0.1, 0, 1.0);
     this.setSpecular(0.8, 0.1, 0, 1.0);
+    this.setShininess(10.0);
+  }
+  setPurpleApearance(){
+    this.setAmbient(0.8, 0.1, 0.5, 1.0);
+    this.setDiffuse(0.8, 0.1, 0.5, 1.0);
+    this.setSpecular(0.8, 0.1, 0.5, 1.0);
     this.setShininess(10.0);
   }
   display() {
@@ -118,6 +127,11 @@ export class MyScene extends CGFscene {
       0.0, 0.0, 0.0, 1.0,
     ];
 
+    this.multMatrix(default_scale);
+    this.pushMatrix();
+
+    ///// Diamond 
+
     // Matrix rotation values
     var angle = Math.PI/4.0;  
 
@@ -129,43 +143,242 @@ export class MyScene extends CGFscene {
     ];
 
     // Matrix translation values
-
-    //var T_x = -3.0;
-    //var T_y = -1.0;
-    //var T_z = 0.0;
+    var T_x = -3.0;
+    var T_y = 1.5;
+    var T_z = 0.0;
 
     var matrix_translate = [
       1.0, 0.0, 0.0, 0.0, 
       0.0, 1.0, 0.0, 0.0, 
       0.0, 0.0, 1.0, 0.0, 
-      this.diamond_Tx, this.diamond_Ty, this.diamond_Tz, 1.0, 
+      T_x, T_y, T_z, 1.0, 
     ];
 
-
-    this.multMatrix(default_scale);
-    this.multMatrix(matrix_rotate);
     this.multMatrix(matrix_translate);
+    this.multMatrix(matrix_rotate);
 
     this.setGreenAppearance();
-    if (this.displayDiamond) this.diamond.display();
+    this.diamond.display();
 
-    // ---- BEGIN Primitive drawing section
-    /*
-    this.setGreenAppearance();
-    if (this.displayDiamond) this.diamond.display();
+    ////////
 
-    this.setPinkAppearance();
-    if (this.displayTriangle) this.triangle.display();
-    
-    this.setYellowAppearance();
-    if (this.displayParallelogram) this.parallelogram.display();
+    this.popMatrix();
+    this.pushMatrix();
+
+    ///// Red Triangle
+
+    // Matrix rotation values
+    angle = 3*Math.PI/4.0;  
+
+    matrix_rotate = [
+      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
+      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    // Matrix translation values
+    T_x = -4.4;
+    T_y = 1.5;
+    T_z = 0.0;
+
+    matrix_translate = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      T_x, T_y, T_z, 1.0, 
+    ];
+
+    this.multMatrix(matrix_translate);
+    this.multMatrix(matrix_rotate);
 
     this.setRedApearance();
-    if (this.displayTriangleSmall) this.triangleSmall.display();
+    this.redTriangle.display();
+
+    ////////
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    ///// Purple Triangle
+    
+    // Matrix rotation values
+    var angle = Math.PI;  
+
+    var matrix_rotate = [
+      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
+      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    // Matrix translation values
+    T_x = -4.7;
+    T_y = 2.2;
+    T_z = 0.0;
+
+    matrix_translate = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      T_x, T_y, T_z, 1.0, 
+    ];
+
+    this.multMatrix(matrix_translate);
+    this.multMatrix(matrix_rotate);
+
+    this.setPurpleApearance();
+    this.purpleTriangle.display();
+
+    ////////
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    ///// Pink Triangle
+    
+    // Matrix rotation values
+    angle = 0.0;  
+
+    matrix_rotate = [
+      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
+      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    // Matrix translation values
+    T_x = -1.3;
+    T_y = 1.2;
+    T_z = 0.0;
+
+    matrix_translate = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      T_x, T_y, T_z, 1.0, 
+    ];
+
+    this.multMatrix(matrix_translate);
+    this.multMatrix(matrix_rotate);
+
+    this.setPinkAppearance();
+    this.pinkTriangle.display();
+
+    ////////
+
+    this.popMatrix();
+    this.pushMatrix();
+
+    ///// Pink Triangle
+    
+    // Matrix rotation values
+    angle = Math.PI;  
+
+    matrix_rotate = [
+      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
+      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    // Matrix translation values
+    T_x = -0.3;
+    T_y = 0.2;
+    T_z = 0.0;
+
+    matrix_translate = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      T_x, T_y, T_z, 1.0, 
+    ];
+
+    this.multMatrix(matrix_translate);
+    this.multMatrix(matrix_rotate);
+
+    this.setOrangeAppearance();
+    this.orangeTriangle.display();
+
+    ////////
+    
+    this.popMatrix();
+    this.pushMatrix();
+
+    ///// Pink Triangle
+    
+    // Matrix rotation values
+    angle = 0.0;  
+
+    matrix_rotate = [
+      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
+      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    // Matrix translation values
+    T_x = 2.0;
+    T_y = 0.2;
+    T_z = 0.0;
+
+    matrix_translate = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      T_x, T_y, T_z, 1.0, 
+    ];
+
+    this.multMatrix(matrix_translate);
+    this.multMatrix(matrix_rotate);
 
     this.setDefaultAppearance();
-    if (this.displayTriangleBig) this.triangleBig.display();
-    */
-    // ---- END Primitive drawing section
+    this.blueTriangle.display();
+
+    ////////
+    
+    this.popMatrix();
+    this.pushMatrix();
+
+    ///// Yellow Parallelogram
+    
+    // Matrix rotation values
+    angle = Math.PI;  
+
+    matrix_rotate = [
+      Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
+      Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    // Matrix translation values
+    T_x = 5.0;
+    T_y = -0.8;
+    T_z = 0.0;
+
+    matrix_translate = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      T_x, T_y, T_z, 1.0, 
+    ];
+
+    this.multMatrix(matrix_translate);
+    this.multMatrix(matrix_rotate);
+
+    var matrix_reflect = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, -1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    this.multMatrix(matrix_reflect);
+
+    this.setYellowAppearance();
+    this.yellowParallelogram.display();
+
+    ////////
   }
 }
