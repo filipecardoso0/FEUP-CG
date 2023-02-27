@@ -119,7 +119,7 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(default_scale);
   
-    /*
+    
     var T_x = 5.8;
     var T_y = -2.2;
     var T_z = 0.1;
@@ -140,35 +140,6 @@ export class MyScene extends CGFscene {
     this.popMatrix();
     this.pushMatrix();
 
-    ///// Yellow Cube
-
-    // Matrix rotation values
-    var angle = 0.0;  
-
-    var matrix_rotate = [
-        Math.cos(angle), - Math.sin(angle), 0.0, 0.0, 
-        Math.sin(angle), Math.cos(angle), 0.0, 0.0, 
-        0.0, 0.0, 1.0, 0.0, 
-        0.0, 0.0, 0.0, 1.0,
-    ];
-
-    // Matrix translation values
-    var T_x = -0.4;
-    var T_y = 0.2;
-    var T_z = -0.6;
-
-    var matrix_translate = [
-        1.0, 0.0, 0.0, 0.0, 
-        0.0, 1.0, 0.0, 0.0, 
-        0.0, 0.0, 1.0, 0.0, 
-        T_x, T_y, T_z, 1.0, 
-    ];
-
-    this.multMatrix(matrix_translate);
-    this.multMatrix(matrix_rotate);
-
-    this.setYellowAppearance();
-
     var scale_x = 10.8;
     var scale_y = 4.0;
     var scale_z = 1.0;
@@ -180,15 +151,22 @@ export class MyScene extends CGFscene {
       0.0, 0.0, 0.0, 1.0,
     ];
 
+    var T_x = -0.4;
+    var T_y = 0.2;
+    var T_z = -0.1;
+
+    var matrix_translate = [
+      1.0, 0.0, 0.0, 0.0, 
+      0.0, 1.0, 0.0, 0.0, 
+      0.0, 0.0, 1.0, 0.0, 
+      T_x, T_y, T_z, 1.0, 
+    ];
+
+    this.multMatrix(matrix_translate);
     this.multMatrix(cube_scale);
 
-    //this.cube.display();
-    //this.cube_quad.display();
-
-    ////////
-    */
-
+    this.setYellowAppearance();
+    
     this.cube_quad.display();
-
   }
 }
