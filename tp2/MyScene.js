@@ -119,6 +119,18 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(default_scale);
 
+    var T_x = 5.8;
+    var T_y = -2.2;
+    var T_z = 0.1;
+
+    var matrix_translate = [
+        1.0, 0.0, 0.0, 0.0, 
+        0.0, 1.0, 0.0, 0.0, 
+        0.0, 0.0, 1.0, 0.0, 
+        T_x, T_y, T_z, 1.0, 
+    ];
+
+    this.multMatrix(matrix_translate);
 
     this.setDefaultAppearance();
 
@@ -140,9 +152,9 @@ export class MyScene extends CGFscene {
     ];
 
     // Matrix translation values
-    var T_x = 0.5;
-    var T_y = -0.5;
-    var T_z = -0.5;
+    var T_x = -0.4;
+    var T_y = 0.2;
+    var T_z = -0.6;
 
     var matrix_translate = [
         1.0, 0.0, 0.0, 0.0, 
@@ -154,12 +166,24 @@ export class MyScene extends CGFscene {
     this.multMatrix(matrix_translate);
     this.multMatrix(matrix_rotate);
 
-    this.setDefaultAppearance();
+    this.setYellowAppearance();
+
+    var scale_x = 10.8;
+    var scale_y = 4.0;
+    var scale_z = 1.0;
+
+    var cube_scale = [
+      scale_x, 0.0, 0.0, 0.0, 
+      0.0, scale_y, 0.0, 0.0, 
+      0.0, 0.0, scale_z, 0.0, 
+      0.0, 0.0, 0.0, 1.0,
+    ];
+
+    this.multMatrix(cube_scale);
+
     this.cube.display();
 
     ////////
-
-
 
   }
 }
