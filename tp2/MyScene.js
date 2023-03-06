@@ -121,8 +121,8 @@ export class MyScene extends CGFscene {
   
     
     var T_x = 5.8;
-    var T_y = -2.2;
-    var T_z = 0.1;
+    var T_y = 0;
+    var T_z = 2.2;
 
     var matrix_translate = [
         1.0, 0.0, 0.0, 0.0, 
@@ -135,6 +135,7 @@ export class MyScene extends CGFscene {
 
     this.setDefaultAppearance();
 
+    this.rotate(Math.PI/2, -1, 0, 0);
     this.tangram.display();
 
     this.popMatrix();
@@ -153,7 +154,7 @@ export class MyScene extends CGFscene {
 
     var T_x = -0.4;
     var T_y = 0.2;
-    var T_z = -0.1;
+    var T_z = -0.01;
 
     var matrix_translate = [
       1.0, 0.0, 0.0, 0.0, 
@@ -162,11 +163,11 @@ export class MyScene extends CGFscene {
       T_x, T_y, T_z, 1.0, 
     ];
 
+
     this.multMatrix(matrix_translate);
     this.multMatrix(cube_scale);
 
     this.setYellowAppearance();
-    
     this.cube_quad.display();
   }
 }
