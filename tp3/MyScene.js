@@ -2,6 +2,8 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MyPyramid } from "./MyPyramid.js";
 import { MyCone } from "./MyCone.js";
 import { MyPlane } from "./MyPlane.js";
+//import { MyUnitCube } from "./MyUnitCube";
+//import { MyTangram } from "./MyTangram";
 
 /**
 * MyScene
@@ -30,6 +32,8 @@ export class MyScene extends CGFscene {
         this.plane = new MyPlane(this, 5);
         this.cone = new MyCone(this, 3, 1);
         this.pyramid = new MyPyramid(this, 3, 1);
+        //this.tangram = new MyTangram(this);
+        //this.cube = new MyUnitCube(this);
         
         this.objects = [this.plane, this.pyramid, this.cone];
 
@@ -43,11 +47,10 @@ export class MyScene extends CGFscene {
         this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
+        this.ambientLight = 0.3;
 
     }
     initLights() {
-        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
-
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
@@ -166,7 +169,8 @@ export class MyScene extends CGFscene {
 
         this.pushMatrix();
         this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-        
+        this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, 1.0);
+
         if (this.displayNormals)
             this.objects[this.selectedObject].enableNormalViz();
         else
