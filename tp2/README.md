@@ -12,7 +12,7 @@
 
 - In exercise 1 we find at first some problems due to applying the matrix of the rotations before applying the translation, we noticed that right away and we were able to build the remaining pieces of the tangram with ease.
 
-![Screenshot 1 - MyTangram](screenshots/cg-t05g05-tp2-1-a.png)
+![Screenshot 1 - MyTangram](./screenshots/cg-t05g05-tp2-1-a.png)
 
 ### **Exercise 2**
 
