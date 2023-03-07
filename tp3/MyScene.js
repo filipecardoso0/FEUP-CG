@@ -41,10 +41,10 @@ export class MyScene extends CGFscene {
         this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4};
 
         //Other variables connected to MyInterface
-        this.selectedObject = 0;
-        this.selectedMaterial = 0;
+        this.selectedObject = 4;
+        this.selectedMaterial = 4;
         this.displayAxis = true;
-        this.displayNormals = false;
+        this.displayNormals = true;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
         this.ambientLight = 0.3;
@@ -58,10 +58,10 @@ export class MyScene extends CGFscene {
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
-        this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
+        this.lights[1].setPosition(2.0, 1.5, 2.0, 1.0);
         this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
-        this.lights[1].disable();
+        this.lights[1].enable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
     }
@@ -127,6 +127,13 @@ export class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
+        // Wood Ambient (no ambient, no diffuse)
+        this.material4 = new CGFappearance(this);
+        this.material4.setAmbient(0.56, 0.38, 0.15, 1.0);
+        this.material4.setDiffuse(0.84, 0.65, 0.4, 1.0);
+        this.material4.setSpecular(0.2, 0.1, 0, 1.0);
+        this.material4.setShininess(10.0);
+
         // Custom material (can be changed in the interface)
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
@@ -140,10 +147,52 @@ export class MyScene extends CGFscene {
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+        this.materials = [this.material1, this.material2, this.material3, this.customMaterial, this.material4];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3, 'Wood Appearance':4 };
+    }
+    setDefaultAppearance() {
+        this.setAmbient(0.2, 0.4, 0.8, 1.0);
+        this.setDiffuse(0.2, 0.4, 0.8, 1.0);
+        this.setSpecular(0.2, 0.4, 0.8, 1.0);
+        this.setShininess(10.0);
+    }
+    setYellowAppearance(){
+        this.setAmbient(0.6, 0.6, 0, 1.0);
+        this.setDiffuse(0.6, 0.6, 0, 1.0);
+        this.setSpecular(0.6, 0.6, 0, 1.0);
+        this.setShininess(10.0);
+    }
+    setOrangeAppearance(){
+        this.setAmbient(0.8, 0.5, 0, 1.0);
+        this.setDiffuse(0.8, 0.5, 0, 1.0);
+        this.setSpecular(0.8, 0.5, 0, 1.0);
+        this.setShininess(10.0);
+    }
+    setPinkAppearance(){
+        this.setAmbient(1, 0.4, 0.4, 1.0);
+        this.setDiffuse(1, 0.4, 0.4, 1.0);
+        this.setSpecular(1, 0.4, 0.4, 1.0);
+        this.setShininess(10.0);
+    }
+    setGreenAppearance(){
+        this.setAmbient(0, 0.6, 0, 1.0);
+        this.setDiffuse(0, 0.6, 0, 1.0);
+        this.setSpecular(0, 0.6, 0, 1.0);
+        this.setShininess(10.0);
+    }
+    setRedApearance(){
+        this.setAmbient(0.8, 0.1, 0, 1.0);
+        this.setDiffuse(0.8, 0.1, 0, 1.0);
+        this.setSpecular(0.8, 0.1, 0, 1.0);
+        this.setShininess(10.0);
+    }
+    setPurpleApearance(){
+        this.setAmbient(0.8, 0.1, 0.5, 1.0);
+        this.setDiffuse(0.8, 0.1, 0.5, 1.0);
+        this.setSpecular(0.8, 0.1, 0.5, 1.0);
+        this.setShininess(10.0);
     }
     display() {
         // ---- BEGIN Background, camera and axis setup

@@ -23,49 +23,6 @@ export class MyTangram extends CGFobject {
         this.blueTriangle = new MyTriangleBig(scene);
         this.yellowParallelogram = new MyParallelogram(scene);
 	}
-
-    setDefaultAppearance() {
-        this.scene.setAmbient(0.2, 0.4, 0.8, 1.0);
-        this.scene.setDiffuse(0.2, 0.4, 0.8, 1.0);
-        this.scene.setSpecular(0.2, 0.4, 0.8, 1.0);
-        this.scene.setShininess(10.0);
-    }
-    setYellowAppearance(){
-        this.scene.setAmbient(0.6, 0.6, 0, 1.0);
-        this.scene.setDiffuse(0.6, 0.6, 0, 1.0);
-        this.scene.setSpecular(0.6, 0.6, 0, 1.0);
-        this.scene.setShininess(10.0);
-    }
-    setOrangeAppearance(){
-        this.scene.setAmbient(0.8, 0.5, 0, 1.0);
-        this.scene.setDiffuse(0.8, 0.5, 0, 1.0);
-        this.scene.setSpecular(0.8, 0.5, 0, 1.0);
-        this.scene.setShininess(10.0);
-    }
-    setPinkAppearance(){
-        this.scene.setAmbient(1, 0.4, 0.4, 1.0);
-        this.scene.setDiffuse(1, 0.4, 0.4, 1.0);
-        this.scene.setSpecular(1, 0.4, 0.4, 1.0);
-        this.scene.setShininess(10.0);
-    }
-    setGreenAppearance(){
-        this.scene.setAmbient(0, 0.6, 0, 1.0);
-        this.scene.setDiffuse(0, 0.6, 0, 1.0);
-        this.scene.setSpecular(0, 0.6, 0, 1.0);
-        this.scene.setShininess(10.0);
-    }
-    setRedApearance(){
-        this.scene.setAmbient(0.8, 0.1, 0, 1.0);
-        this.scene.setDiffuse(0.8, 0.1, 0, 1.0);
-        this.scene.setSpecular(0.8, 0.1, 0, 1.0);
-        this.scene.setShininess(10.0);
-    }
-    setPurpleApearance(){
-        this.scene.setAmbient(0.8, 0.1, 0.5, 1.0);
-        this.scene.setDiffuse(0.8, 0.1, 0.5, 1.0);
-        this.scene.setSpecular(0.8, 0.1, 0.5, 1.0);
-        this.scene.setShininess(10.0);
-    }
 	display() {
         this.scene.pushMatrix();
 
