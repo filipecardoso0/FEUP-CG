@@ -23,17 +23,10 @@ export class MyTangram extends CGFobject {
         this.blueTriangle = new MyTriangleBig(scene);
         this.yellowParallelogram = new MyParallelogram(scene);
 
-        // Diamond Material
-        this.diamondMaterial = new CGFappearance(scene);
-        this.diamondMaterial.setAmbient(0.0, 0.1, 0, 1.0);
-        this.diamondMaterial.setDiffuse(0.0, 0.1, 0, 1.0);
-        this.diamondMaterial.setSpecular(0.0, 0.6, 0, 1.0);
-        this.diamondMaterial.setShininess(10.0);
-
         // Red Triangle Material
         this.redTriangleMaterial = new CGFappearance(scene);
-        this.redTriangleMaterial.setAmbient(0.1, 0, 0, 1.0);
-        this.redTriangleMaterial.setDiffuse(0.1, 0, 0, 1.0);
+        this.redTriangleMaterial.setAmbient(0, 0, 0, 1.0);
+        this.redTriangleMaterial.setDiffuse(0, 0, 0, 1.0);
         this.redTriangleMaterial.setSpecular(0.8, 0.1, 0, 1.0);
         this.redTriangleMaterial.setShininess(10.0);
         
@@ -104,7 +97,7 @@ export class MyTangram extends CGFobject {
         this.scene.multMatrix(matrix_translate);
         this.scene.multMatrix(matrix_rotate);
 
-        this.diamondMaterial.apply();
+        this.scene.customMaterial.apply();
         this.diamond.display(); 
 
         ////////
