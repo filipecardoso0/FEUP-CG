@@ -127,7 +127,7 @@ export class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
-        // Wood Ambient (no ambient, no diffuse)
+        // Wood Ambient (low specular)
         this.material4 = new CGFappearance(this);
         this.material4.setAmbient(0.56, 0.38, 0.15, 1.0);
         this.material4.setDiffuse(0.84, 0.65, 0.4, 1.0);

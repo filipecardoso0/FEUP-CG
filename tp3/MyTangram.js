@@ -25,8 +25,8 @@ export class MyTangram extends CGFobject {
 
         // Red Triangle Material
         this.redTriangleMaterial = new CGFappearance(scene);
-        this.redTriangleMaterial.setAmbient(0, 0, 0, 1.0);
-        this.redTriangleMaterial.setDiffuse(0, 0, 0, 1.0);
+        this.redTriangleMaterial.setAmbient(0.1, 0.1, 0.1, 1.0);
+        this.redTriangleMaterial.setDiffuse(0.1, 0.1, 0.1, 1.0);
         this.redTriangleMaterial.setSpecular(0.8, 0.1, 0, 1.0);
         this.redTriangleMaterial.setShininess(10.0);
         
@@ -64,9 +64,25 @@ export class MyTangram extends CGFobject {
         this.yellowParallelogramMaterial.setDiffuse(0.1, 0.1, 0.0, 1.0);
         this.yellowParallelogramMaterial.setSpecular(0.6, 0.6, 0.0, 1.0);
         this.yellowParallelogramMaterial.setShininess(10.0);
-
-
 	}
+    enableNormalViz() {
+        this.diamond.enableNormalViz();
+        this.redTriangle.enableNormalViz();
+        this.purpleTriangle.enableNormalViz();
+        this.pinkTriangle.enableNormalViz();
+        this.orangeTriangle.enableNormalViz();
+        this.blueTriangle.enableNormalViz();
+        this.yellowParallelogram.enableNormalViz();
+    }
+    disableNormalViz() {
+        this.diamond.disableNormalViz();
+        this.redTriangle.disableNormalViz();
+        this.purpleTriangle.disableNormalViz();
+        this.pinkTriangle.disableNormalViz();
+        this.orangeTriangle.disableNormalViz();
+        this.blueTriangle.disableNormalViz();
+        this.yellowParallelogram.disableNormalViz();
+    }
 	display() {
         this.scene.pushMatrix();
 
