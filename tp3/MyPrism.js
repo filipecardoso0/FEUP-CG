@@ -22,27 +22,14 @@ export class MyPrism extends CGFobject {
 
         var ang = 0;
         var alphaAng = 2*Math.PI/this.slices;
-
-        for(var i = 0; i < this.slices; i++){
+        for(var i = 0; i < this.slices; i++){ 
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
-            // in each face will be different
-
+            // in each face will be different  
             var sa=Math.sin(ang);
             var saa=Math.sin(ang+alphaAng);
             var ca=Math.cos(ang);
             var caa=Math.cos(ang+alphaAng);
-
-            this.vertices.push(ca, sa, 0);
-            this.vertices.push(caa, saa, 0);
-            this.vertices.push(ca, sa, 1);
-            this.vertices.push(caa, saa, 1);
-
-            this.vertices.push(ca, sa, 0);
-            this.vertices.push(caa, saa, 0);
-            this.vertices.push(ca, sa, 1);
-            this.vertices.push(caa, saa, 1);
-
 
             var p1 = [ca, sa, 0];
             var p2 = [caa, saa, 0];
@@ -56,21 +43,45 @@ export class MyPrism extends CGFobject {
                 A[2] * B[0] - A[0] * B[2],
                 A[0] * B[1] - A[1] * B[0]
             ]
+            
 
-            // push normal once for each vertex of this triangle
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
+            for(var step = 0; step < this.stacks; step++){
 
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
+                var z = step/this.stacks;
+                var z_1 = (step+1)/this.stacks;
 
-            this.indices.push(8*i, (8*i+1), (8*i+2));
-            this.indices.push((8*i+1), (8*i+3), (8*i+2));
+                this.vertices.push(ca, sa, z);
+                this.vertices.push(caa, saa, z);
+                this.vertices.push(ca, sa, z_1);
+                this.vertices.push(caa, saa, z_1);
+    
+                this.vertices.push(ca, sa, z);
+                this.vertices.push(caa, saa, z);
+                this.vertices.push(ca, sa, z_1);
+                this.vertices.push(caa, saa, z_1);
+    
+    
+                // push normal once for each vertex of this triangle
+                this.normals.push(...normal);
+                this.normals.push(...normal);
+                this.normals.push(...normal);
+                this.normals.push(...normal);
+    
+                this.normals.push(...normal);
+                this.normals.push(...normal);
+                this.normals.push(...normal);
+                this.normals.push(...normal);
 
+                var i_0 = 8*i;
+                var i_1 = 8*i + 1;
+                var i_2 = 8*i + 2;
+                var i_3 = 8*i + 3;
+                
+                
+                this.indices.push(i_0, i_1, i_2);
+                this.indices.push(i_1, i_3, i_2);
+            }
+            
             ang+=alphaAng;
         }
         
@@ -87,7 +98,7 @@ export class MyPrism extends CGFobject {
      */
     updateBuffers(complexity){
         this.slices = 3 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
-
+        // this.stacks = 1 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
