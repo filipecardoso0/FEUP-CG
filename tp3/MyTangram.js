@@ -1,9 +1,9 @@
 import {CGFobject, CGFappearance} from '../lib/CGF.js';
-import { MyDiamond } from "./MyDiamond.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { MyParallelogram } from "./MyParallelogram.js";
-import { MyTriangleSmall } from "./MyTriangleSmall.js";
-import { MyTriangleBig } from "./MyTriangleBig.js";
+import { MyDiamond } from "./tangram/MyDiamond.js";
+import { MyTriangle } from "./tangram/MyTriangle.js";
+import { MyParallelogram } from "./tangram/MyParallelogram.js";
+import { MyTriangleSmall } from "./tangram/MyTriangleSmall.js";
+import { MyTriangleBig } from "./tangram/MyTriangleBig.js";
 
 /**
  * MyTangram

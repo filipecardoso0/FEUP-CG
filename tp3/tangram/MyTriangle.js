@@ -1,10 +1,10 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject} from '../../lib/CGF.js';
 /**
- * MyDiamond
+ * MyTriangle
  * @constructor
  * @param scene - Reference to MyScene object
  */
-export class MyParallelogram extends CGFobject {
+export class MyTriangle extends CGFobject {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();
@@ -12,27 +12,14 @@ export class MyParallelogram extends CGFobject {
 	
 	initBuffers() {
 		this.vertices = [
-			0, 0, 0,	//0
-			1, 0, 0,	//1
-			1, 1, 0,	//2
-			2, 0, 0,    //3
-			2, 1, 0,    //4
-			3, 1, 0		//5
+			-1, -1, 0,	//0
+			1, -1, 0,	//1
+			-1, 1, 0,	//2
 		];
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
-            // front side
-			0, 1, 2,
-			1, 3, 4,
-            1, 4, 2,
-            3, 5, 4,
-            // back side
-            2, 1, 0,
-            4, 3, 1,
-            2, 4, 1,
-            4, 5, 3
-
+			0, 1, 2
 		];
 
 		//The defined indices (and corresponding vertices)
