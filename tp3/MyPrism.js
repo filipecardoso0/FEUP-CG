@@ -43,10 +43,9 @@ export class MyPrism extends CGFobject {
                 A[2] * B[0] - A[0] * B[2],
                 A[0] * B[1] - A[1] * B[0]
             ]
+            ang+=alphaAng;
             
-
             for(var step = 0; step < this.stacks; step++){
-
                 var z = step/this.stacks;
                 var z_1 = (step+1)/this.stacks;
 
@@ -60,7 +59,6 @@ export class MyPrism extends CGFobject {
                 this.vertices.push(ca, sa, z_1);
                 this.vertices.push(caa, saa, z_1);
     
-    
                 // push normal once for each vertex of this triangle
                 this.normals.push(...normal);
                 this.normals.push(...normal);
@@ -72,17 +70,16 @@ export class MyPrism extends CGFobject {
                 this.normals.push(...normal);
                 this.normals.push(...normal);
 
-                var i_0 = 8*i;
-                var i_1 = 8*i + 1;
-                var i_2 = 8*i + 2;
-                var i_3 = 8*i + 3;
-                
+                console.log(this.vertices.length)
+
+                var i_0 = this.vertices.length/3 - 8;
+                var i_1 = this.vertices.length/3 - 8 + 1;
+                var i_2 = this.vertices.length/3 - 8 + 2;
+                var i_3 = this.vertices.length/3 - 8 + 3;
                 
                 this.indices.push(i_0, i_1, i_2);
                 this.indices.push(i_1, i_3, i_2);
             }
-            
-            ang+=alphaAng;
         }
         
         
@@ -98,7 +95,6 @@ export class MyPrism extends CGFobject {
      */
     updateBuffers(complexity){
         this.slices = 3 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
-        // this.stacks = 1 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
