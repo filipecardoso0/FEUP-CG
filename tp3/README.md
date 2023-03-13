@@ -2,22 +2,25 @@
 
 ## Group T05G05
 
-## TP 2 Notes
-
-### **Global Notes**
-
-- ...
+## TP 3 Notes
 
 ### **Exercise 1**
 
-- In exercise 1 ...
+- In exercise 1 we didn't have many difficulties working around the materials to be applied in the unit cube. However, in the tangram, we had some problems with the materials because we missed creating the normal vectors, after that, it was pretty straightforward.  
 
-![Screenshot 1 - Name](./screenshots/cg-t05g05-tp3-1.png)
+![Screenshot 1 - MyUnitCube](./screenshots/cg-t05g05-tp3-1.png)
+---
+![Screenshot 2 - MyTangram](./screenshots/cg-t05g05-tp3-2.png)
 
-### **Exercise 1**
+### **Exercise 2**
 
-- In exercise 1 ...
+- In exercise 2, there were some problems creating the indices list and setting up an order of vertices that would make it easier to create the cylinder as the normal vectors of a side of the prism are all equal in every point, then the color will be the same in every point of that side. So this is the same as calculating the color in one point and replicating it in all points (that is the definition of constant shading).
 
-- Não esquecer deste topico:
-7. Numa primeira versão do prisma, considere que o cilindro tem apenas um “andar” (tal como o exemplo na Figura 1 (a)). Note que, para cada face, os vetores normais dos seus vértices devem ser perpendiculares a essa face (Figura 2). Poderá por isso ter de definir o mesmo vértice mais do que uma vez, na lista de vértices, de forma a atribuir-lhe normais diferentes.
-Comente a eventualidade de, com esta definição de normais, a iluminação calculada ser semelhante à calculada com "Constant Shading"
+![Screenshot 3 - MyPrism](./screenshots/cg-t05g05-tp3-3.png)
+
+### **Exercise 3**
+
+- In exercise 3 we found ourselves in the same problem trying to reduce the number of vertices and simplifying its order to be easier create the indices list. 
+- In the end, we iterated through each edge of the cylinder and added the vertices to the list according to the order of iteration (from the base in the xy plane to the other one).
+
+![Screenshot 4 - MyCylinder](./screenshots/cg-t05g05-tp3-4.png)
