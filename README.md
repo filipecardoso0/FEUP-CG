@@ -5,7 +5,7 @@
 | ---------------- | --------- | ------------------ |
 | João Paulo Moreira Araújo         | 202004293 | up202004293@edu.fe.up.pt                |
 | Alexandre Guimarães Gomes Correia          | 202007042 | up202007042@edu.fe.up.pt                |
-| John Doe         | 202001234 | up202001234@edu.fe.up.pt                |
+| Filipe de Azevedo Cardoso         | 202006409 | up202006409@edu.fe.up.pt                |
 
 ----
 
