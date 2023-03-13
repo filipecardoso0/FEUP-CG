@@ -13,7 +13,10 @@ export class MyPrism extends CGFobject {
         this.stacks = stacks;
 		this.initBuffers();
 	}
-	
+	normalVector(vector) {
+		var mod = Math.sqrt(vector[0]*vector[0]+vector[1]*vector[1]+vector[2]*vector[2]);
+		return [vector[0]/mod, vector[1]/mod, vector[2]/mod];
+	}
 	initBuffers() {
 
         this.vertices = [];
@@ -60,15 +63,15 @@ export class MyPrism extends CGFobject {
                 this.vertices.push(caa, saa, z_1);
     
                 // push normal once for each vertex of this triangle
-                this.normals.push(...normal);
-                this.normals.push(...normal);
-                this.normals.push(...normal);
-                this.normals.push(...normal);
+                this.normals.push(...this.normalVector(normal));
+                this.normals.push(...this.normalVector(normal));
+                this.normals.push(...this.normalVector(normal));
+                this.normals.push(...this.normalVector(normal));
     
-                this.normals.push(...normal);
-                this.normals.push(...normal);
-                this.normals.push(...normal);
-                this.normals.push(...normal);
+                this.normals.push(...this.normalVector(normal));
+                this.normals.push(...this.normalVector(normal));
+                this.normals.push(...this.normalVector(normal));
+                this.normals.push(...this.normalVector(normal));
 
                 console.log(this.vertices.length)
 
