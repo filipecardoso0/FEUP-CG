@@ -74,8 +74,8 @@ export class MyCylinder extends CGFobject {
      * @param {integer} complexity - changes number of slices
      */
 	 updateBuffers(complexity){
-        this.slices = 3 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
-        this.stacks = 1 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
+        // this.slices = 3 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
+        // this.stacks = 1 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
