@@ -12,7 +12,7 @@
 
 - In exercise 1 ...
 
-![Screenshot 1 - Name](./screenshots/cg-t05g05-tp3-1-a.png)
+![Screenshot 1 - Name](./screenshots/cg-t05g05-tp3-1.png)
 
 ### **Exercise 1**
 
