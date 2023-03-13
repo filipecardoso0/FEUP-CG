@@ -26,7 +26,7 @@ export class MyCylinder extends CGFobject {
 		// vertices
 		var slice_angle = Math.PI*2/this.slices;
 		var angle = 0;
-		var side_size = 2;
+		var side_size = 1;
 		var stack_size = side_size/this.stacks;
 
 		for (var slice = 0; slice < this.slices; slice++) {
@@ -41,7 +41,7 @@ export class MyCylinder extends CGFobject {
 		var index2 = this.stacks+1;
 		var num_vertices = (this.stacks+1)*this.slices
 
-		for (var i = 0; i < this.stacks; i++) {
+		for (var i = 0; i < this.slices; i++) {
 			for (var j = 0; j < this.stacks; j++) {
 				this.indices.push((index)%num_vertices, (index2)%num_vertices, (index+1)%num_vertices);
 				this.indices.push((index+1)%num_vertices, (index2)%num_vertices, (index2+1)%num_vertices);
@@ -68,5 +68,17 @@ export class MyCylinder extends CGFobject {
 
 		this.initGLBuffers();
 	}
+
+	 /**
+     * Called when user interacts with GUI to change object's complexity.
+     * @param {integer} complexity - changes number of slices
+     */
+	 updateBuffers(complexity){
+        this.slices = 3 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
+        this.stacks = 1 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 3-12
+        // reinitialize buffers
+        this.initBuffers();
+        this.initNormalVizBuffers();
+    }
 }
 
