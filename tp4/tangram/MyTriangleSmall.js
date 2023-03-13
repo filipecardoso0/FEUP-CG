@@ -27,6 +27,7 @@ export class MyTriangleSmall extends CGFobject {
 			3, 5, 4,
 		];
 
+
 		this.normals = [];
 
 		// Generating normals for each vertex, for both positive and negative Z axis

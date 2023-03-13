@@ -33,6 +33,28 @@ export class MyParallelogram extends CGFobject {
 			7, 6, 4
 		];
 
+		/*
+		Sets Texture coords (s,t)
+		+----------> s
+        |
+        |
+		|
+		v
+        t
+        */
+
+		this.texCoords = [
+			0.75, 0.75, //A 0
+			0.25,0.75, //B 1
+			0.5, 1, //C 2
+			1, 1, //D 3
+
+			1, 1, //D 0
+			0.5 ,1, //C 1
+			0.25, 0.75, //B 2
+			0.75, 0.75, //A 3
+		]
+
 		this.normals = [];
 
 		for (var i = 0; i < 4; i++) 

@@ -32,6 +32,28 @@ export class MyDiamond extends CGFobject {
 			5, 6, 7,
 		];
 
+		/*
+		Texture coords (s,t)
+		+----------> s
+        |
+        |
+		|
+		v
+        t
+        */
+
+		this.texCoords = [
+			0, 0.5, //A
+			0.25, 0.75, //B
+			0.25, 0.25, //C
+			0.5, 0.5, //D
+
+			0.5, 0.5, //D
+			0.25, 0.25, //C
+			0.25, 0.75, //B
+			0, 0.5, //A
+		]
+
 		this.normals = [];
 
 		for (var i = 0; i < 4; i++) 
