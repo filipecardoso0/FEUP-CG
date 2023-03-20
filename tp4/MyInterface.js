@@ -25,6 +25,12 @@ export class MyInterface extends CGFinterface {
         //Hide MyQuad From Scene
         this.gui.add(this.scene, 'displayMyQuad').name('Display MyQuad');
 
+        //Hide MyCube From Scene
+        this.gui.add(this.scene, 'displayMyUnitCubeQuad').name('Display MyCube');
+
+        //Hide Tangram From Scene
+        this.gui.add(this.scene, 'displayMyTangram').name('Display Tangram');
+
         //Dropdown for textures
         this.gui.add(this.scene, 'selectedTexture', this.scene.textureIds).name('Selected Texture').onChange(this.scene.updateAppliedTexture.bind(this.scene));
         //Dropdown for wrapping (S)

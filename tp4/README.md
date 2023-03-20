@@ -13,3 +13,7 @@
 - In exercise 1 ...
 
 ![Screenshot 1 - Name](./screenshots/cg-t05g05-tp4-1.png)
+
+- In exercise 2 ...
+
+![Screenshot 2 - Name](./screenshots/cg-t05g05-tp4-2.png)
