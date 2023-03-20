@@ -16,4 +16,4 @@
 
 - In exercise 2 we also just had to be careful with the translations and rotations of the scene to set the cube textures.
 
-![Screenshot 2 - Name](./screenshots/cg-t05g05-tp4-2.png)
+![Screenshot 2 - MyUnitCube](./screenshots/cg-t05g05-tp4-2.png)
