@@ -71,7 +71,7 @@ export class ShaderScene extends CGFscene {
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
 
-		this.texture = new CGFtexture(this, "textures/texture.jpg");
+		this.texture = new CGFtexture(this, "textures/waterTex.jpg");
 		this.appearance.setTexture(this.texture);
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -104,7 +104,9 @@ export class ShaderScene extends CGFscene {
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
 		this.testShaders[6].setUniformsValues({ sinusoidalWaveValue: 0 });
 
-		this.testShaders[11].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[11].setUniformsValues({ uSampler: 2 });
+		this.testShaders[11].setUniformsValues({ uSampler2: 3 });
+		this.testShaders[11].setUniformsValues({ timeFactor: 0});
 
 		// Shaders interface variables
 		this.shadersList = {
@@ -200,12 +202,16 @@ export class ShaderScene extends CGFscene {
 	// called periodically (as per setUpdatePeriod() in init())
 	update(t) {
 		// only shader 6 is using time factor
-		if (this.selectedExampleShader == 6)
+		if (this.selectedExampleShader == 6){
 			// Dividing the time by 100 "slows down" the variation (i.e. in 100 ms timeFactor increases 1 unit).
 			// Doing the modulus (%) by 100 makes the timeFactor loop between 0 and 99
 			// ( so the loop period of timeFactor is 100 times 100 ms = 10s ; the actual animation loop depends on how timeFactor is used in the shader )
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 100 });
 			this.testShaders[6].setUniformsValues({ sinusoidalWaveValue: Math.sin(2*Math.PI * (t / 1000)) });
+		}
+		if (this.selectedExampleShader == 11){
+			this.testShaders[11].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		}
 	}
 
 	// main display function
