@@ -29,11 +29,10 @@ export class MyTangram extends CGFobject {
         this.tangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
         this.tangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.tangramMaterial.setShininess(10.0);
+        
         //Loads Object Texture (Whole tangram texture)
         this.tangramMaterial.loadTexture('images/tangram.png');
-        this.tangramMaterial.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-
-       
+        this.tangramMaterial.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');       
 	}
     enableNormalViz() {
         this.diamond.enableNormalViz();

@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyTangram } from "./MyTangram.js"; 
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -25,10 +26,20 @@ export class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
+        //------ Textures
+        this.texture1 = new CGFtexture(this, 'images/board.jpg');
+        this.texture2 = new CGFtexture(this, 'images/floor.png');
+        this.texture3 = new CGFtexture(this, 'images/window.jpg');
+        this.textureCubeTop = new CGFtexture(this, 'images/mineTop.png');
+        this.textureCubeBottom = new CGFtexture(this, 'images/mineBottom.png');
+        this.textureCubeSide = new CGFtexture(this, 'images/mineSide.png');
+        //-------
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this); 
+        this.cube = new MyUnitCubeQuad(this, this.textureCubeTop, this.textureCubeSide, this.textureCubeSide, this.textureCubeSide, this.textureCubeSide, this.textureCubeBottom);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -39,12 +50,6 @@ export class MyScene extends CGFscene {
         this.quadMaterial.loadTexture('images/default.png');
         this.quadMaterial.setTextureWrap('REPEAT', 'REPEAT');
         //------
-
-        //------ Textures
-        this.texture1 = new CGFtexture(this, 'images/board.jpg');
-        this.texture2 = new CGFtexture(this, 'images/floor.png');
-        this.texture3 = new CGFtexture(this, 'images/window.jpg');
-        //-------
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
@@ -63,6 +68,12 @@ export class MyScene extends CGFscene {
 
         //Display Myquad
         this.displayMyQuad = false; 
+
+        //Display MyUnitCubeQuad
+        this.displayMyUnitCubeQuad = false;
+
+        //Display MyTangram
+        this.displayMyTangram = false;
 
       }
 
@@ -133,8 +144,12 @@ export class MyScene extends CGFscene {
             this.quad.display();
         }
 
+        if(this.displayMyUnitCubeQuad)
+            this.cube.display();
+
         //Applies tangram Material to the Tangram
-        this.tangram.display(); 
+        if(this.displayMyTangram)
+            this.tangram.display(); 
 
         // ---- END Primitive drawing section
     }
