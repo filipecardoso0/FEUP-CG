@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPlane } from "./objects/MyPlane.js";
 import { MySphere } from "./objects/MySphere.js";
+import { BirdBody } from "./bird/MyBird.js";
 
 /**
  * MyScene
@@ -28,6 +29,7 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 24 , 12, [1,1,1]);
+    this.bird = new BirdBody(this, [1,1,1]);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -58,7 +60,7 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(5, 3, 3),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -92,10 +94,14 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
 
+    // this.pushMatrix();
+    // this.appearance2.apply();
+    // this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+    // this.sphere.display();
+    // this.popMatrix();
+
     this.pushMatrix();
-    this.appearance2.apply();
-    this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-    this.sphere.display();
+    this.bird.display();
     this.popMatrix();
     
     // ---- END Primitive drawing section
