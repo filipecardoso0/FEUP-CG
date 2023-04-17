@@ -6,7 +6,7 @@ import { MyFrustum } from '../objects/MyFrustum.js';
 import { MyPrism } from '../objects/MyPrism.js';
 import { MyPlane } from '../objects/MyPlane.js';
 
-export class BirdBody extends CGFobject {
+export class MyBird extends CGFobject {
     constructor(scene,  scale) {
         super(scene);
         this.scale = scale;
