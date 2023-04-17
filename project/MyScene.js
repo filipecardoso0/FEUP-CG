@@ -1,6 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPlane } from "./objects/2d/MyPlane.js";
-import { MySphere } from "./objects/3d/MySphere.js";
+import { MyPanoram } from "./MyPanoram.js";
 
 /**
  * MyScene
@@ -16,7 +16,7 @@ export class MyScene extends CGFscene {
     this.initCameras();
     this.initLights();
 
-    this.displayNormals = true;
+    this.fovFactor = 1.25;
 
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -29,7 +29,6 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
-    this.sphere = new MySphere(this, 24 , 12, 200);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -48,10 +47,8 @@ export class MyScene extends CGFscene {
     this.appearance2.setTextureWrap('REPEAT', 'REPEAT');
 
     this.texture3 = new CGFtexture(this, "images/panorama4.jpg");
-    this.appearance3 = new CGFappearance(this);
-    this.appearance3.setTexture(this.texture3);
-    this.appearance3.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.panoram = new MyPanoram(this, this.texture3);
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -75,6 +72,7 @@ export class MyScene extends CGFscene {
     this.setShininess(10.0);
   }
   display() {
+    this.camera.fov = this.fovFactor;
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -98,17 +96,8 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
 
-    this.pushMatrix();
-    this.appearance3.apply();
     this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-    
-    if (this.displayNormals)
-      this.sphere.enableNormalViz();
-    else
-      this.sphere.disableNormalViz();
-
-    this.sphere.display();
-    this.popMatrix();
+    this.panoram.display();
     
     // ---- END Primitive drawing section
   }
