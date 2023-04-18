@@ -46,8 +46,8 @@ export class MyScene extends CGFscene {
     this.panoram = new MyPanoram(this, this.texturePanorama);
 
     this.textureBillboard1 = new CGFtexture(this, "images/billboardtree.png");
-    this.textureBillboard2 = new CGFtexture(this, "images/billboardtree.png");
-    this.textureBillboard3 = new CGFtexture(this, "images/billboardtree.png");
+    this.textureBillboard2 = new CGFtexture(this, "images/billboardtree2.png");
+    this.textureBillboard3 = new CGFtexture(this, "images/billboardtree3.png");
 
     this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, [0,-87.5, 0], 20);
     this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, [60,-87.5, 0], "z", 20);

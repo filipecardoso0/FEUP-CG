@@ -7,6 +7,7 @@ export class MyTreeRowPatch extends CGFobject {
         this.spacingX = 0;
         this.spacingZ = 0;
         this.spacingXorZ = spacingXorZ;
+        this.spacing = spacing;
 
         this.textures = [
             CGFtexture,
@@ -14,18 +15,21 @@ export class MyTreeRowPatch extends CGFobject {
             CGFtexture3,
         ]
 
-        this.appearances = [];
-        for (let i = 0; i < 3; i++) {
-            this.appearances.push(new CGFappearance(this.scene));
-            this.appearances[i].setTexture(this.textures[i]);
-            this.appearances[i].setTextureWrap('REPEAT', 'REPEAT');
-        }
-
         this.billboards = [];
         for (let i = 0; i < 6; i++) {
-            this.billboards.push(new MyBillboard(this.scene, this.textures[i%3]));
+            this.billboards.push(new MyBillboard(this.scene, this.textures[Math.floor(Math.random()*3)]));
         }
-
+        this.coordinatesOffset = [
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+            [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
+        ];
         this.coordinates = [
             [0,0,0],
             [0,0,0],
@@ -40,18 +44,16 @@ export class MyTreeRowPatch extends CGFobject {
 
         if(this.spacingXorZ == "x") { // spacingXorZ = "x" or "z"
             this.spacingX = spacing;
-            console.log('x');
         } else  {
             this.spacingZ = spacing;
-            console.log('z');
         }
 
         for (let i = 0; i < 6; i++) {
             this.coordinates[i] =
             [
-                startX + i*this.spacingX,
+                startX + i*this.spacingX + this.coordinatesOffset[i][0],
                 startY,
-                startZ + i*this.spacingZ,
+                startZ + i*this.spacingZ + this.coordinatesOffset[i][2],
             ];
         }
     }
