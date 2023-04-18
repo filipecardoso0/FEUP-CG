@@ -37,10 +37,11 @@ export class MyScene extends CGFscene {
 
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.texture2 = new CGFtexture(this, "images/heightmap_v2.jpg");
-    this.terrain = new MyTerrain(this, this.texture, this.texture2);
+    this.texture3 = new CGFtexture(this, "images/altimetry.png");
+    this.terrain = new MyTerrain(this, this.texture, this.texture2, this.texture3);
 
-    this.texture3 = new CGFtexture(this, "images/panorama4.jpg");
-    this.panoram = new MyPanoram(this, this.texture3);
+    this.texturePanorama = new CGFtexture(this, "images/panorama4.jpg");
+    this.panoram = new MyPanoram(this, this.texturePanorama);
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -80,10 +81,11 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
+    this.panoram.display();
+    
     this.terrain.display();
 
-    this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-    this.panoram.display();
+
     
     // ---- END Primitive drawing section
   }
