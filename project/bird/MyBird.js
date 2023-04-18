@@ -5,6 +5,7 @@ import { MyCone } from '../objects/MyCone.js';
 import { MyFrustum } from '../objects/MyFrustum.js';
 import { MyPrism } from '../objects/MyPrism.js';
 import { MyPlane } from '../objects/MyPlane.js';
+import { MyBirdWing } from './MyBirdWing.js';
 
 export class MyBird extends CGFobject {
     constructor(scene,  scale) {
@@ -14,6 +15,8 @@ export class MyBird extends CGFobject {
         //Initialize Objects
         this.body_frustum = new MyFrustum(scene, 20, 20, -0.4);
         this.body_sphere = new MySphere(scene, 20, 10, [1,1,1]);
+        this.wing_R = new MyBirdWing(scene, 1);
+        this.wing_L = new MyBirdWing(scene, 1);
         this.neck = new MyFrustum(scene, 20, 10, 1);
         this.head = new MySphere(scene, 20, 10, [1,1,1]);
         this.eye_R = new MySphere(scene, 20, 10, [0.1,0.1,0.1]);
@@ -43,6 +46,19 @@ export class MyBird extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(0.59,0.59,0.59);
         this.body_sphere.display();
+        this.scene.popMatrix();
+
+        //Wings
+        // this.wing_L.enableNormalViz();
+        // this.wing_R.enableNormalViz();
+        this.scene.pushMatrix();
+        this.scene.translate(-0.8, -0.8, -1);
+        this.wing_R.display();
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.scale(-1,1,1);
+        this.scene.translate(-0.8, -0.8, -1);
+        this.wing_L.display();
         this.scene.popMatrix();
 
         //Neck

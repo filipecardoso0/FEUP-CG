@@ -63,11 +63,7 @@ export class MyFrustum extends CGFobject {
 			}
 			angle += slice_angle;
 		}
-
-		console.log(this.vertices);
-		console.log(this.indices);
-		console.log(this.normals);
-
+		
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
 		this.primitiveType = this.scene.gl.TRIANGLES;
