@@ -45,7 +45,19 @@ export class MyScene extends CGFscene {
     this.panoram = new MyPanoram(this, this.texturePanorama);
 
     this.textureBillboard = new CGFtexture(this, "images/billboardtree.png");
-    this.billboard = new MyBillboard(this, this.textureBillboard);
+    
+    this.billboards = [
+      new MyBillboard(this, this.textureBillboard),
+      new MyBillboard(this, this.textureBillboard),
+      new MyBillboard(this, this.textureBillboard),
+    ];
+
+    this.billboardPositions = [
+      [0,-87.5,10],
+      [20,-87.5,30],
+      [-30,-87.5,15],
+    ];
+
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -54,13 +66,22 @@ export class MyScene extends CGFscene {
     this.lights[0].update();
   }
   initCameras() {
-    this.camera = new CGFcamera(
+    /*this.camera = new CGFcamera(
       1.0,
       0.1,
       1000,
       vec3.fromValues(50, 10, 15),
       vec3.fromValues(0, 0, 0)
+    ); */
+
+    this.camera = new CGFcamera(
+      1.0,
+      0.1,
+      1000,
+      vec3.fromValues(0, -86, 60),
+      vec3.fromValues(0, -86, 30)
     );
+
   }
   setDefaultAppearance() {
     this.setAmbient(1, 1, 1, 1.0);
@@ -91,10 +112,15 @@ export class MyScene extends CGFscene {
     
     this.terrain.display();
 
-    this.billboard.display();
+    for (let i = 0; i < this.billboards.length; i++) {
+      let x = this.billboardPositions[i][0];
+      let y = this.billboardPositions[i][1];
+      let z = this.billboardPositions[i][2];
 
+      this.billboards[i].display(x, y, z);
+      break;
+    }
 
-    
     // ---- END Primitive drawing section
   }
 }

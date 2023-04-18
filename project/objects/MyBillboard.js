@@ -14,14 +14,32 @@ export class MyBillboard extends CGFobject {
 
         this.plane = new MyPlane(this.scene, 30);
     }
-    display() {
+    followCamera(x, y, z) {
+        let vector1 = vec2.fromValues(this.scene.camera.position[0] - x, this.scene.camera.position[2] - z);
+        let vector2 = vec2.fromValues(0, 1);
+
+        vec2.normalize(vector1, vector1);
+        
+        let angle = 0;
+
+        if(vector1[0] < 0)
+            angle = - Math.acos(vec2.dot(vector1, vector2));
+        else 
+            angle = Math.acos(vec2.dot(vector1, vector2));
+
+        this.scene.rotate( angle,0.0,1.0,0.0);     
+    }    
+    display(x, y, z) {
         this.scene.pushMatrix();
         this.scene.setActiveShader(this.shader);
-
         this.appearance.apply();
-        this.scene.translate(0,-50,10);
+
+        this.scene.translate(x,y,z);
+
         this.scene.scale(20,25,25);
-        this.scene.rotate(0,0,0,0);
+
+        this.followCamera(x, y, z);
+
         this.plane.display();
 
         this.scene.popMatrix();
