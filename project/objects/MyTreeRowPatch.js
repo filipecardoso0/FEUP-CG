@@ -2,12 +2,13 @@ import {CGFobject, CGFappearance} from '../../lib/CGF.js';
 import {MyBillboard} from './2d/MyBillboard.js';
 
 export class MyTreeRowPatch extends CGFobject {
-    constructor(scene, CGFtexture, CGFtexture2, CGFtexture3, coordinates, spacingXorZ, spacing) {
+    constructor(scene, CGFtexture, CGFtexture2, CGFtexture3, coordinates, spacingXorZ, spacing, windVector) {
         super(scene);
         this.spacingX = 0;
         this.spacingZ = 0;
         this.spacingXorZ = spacingXorZ;
         this.spacing = spacing;
+        this.windVector = windVector;
 
         this.textures = [
             CGFtexture,

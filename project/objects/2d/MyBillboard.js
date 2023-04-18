@@ -2,9 +2,10 @@ import {CGFobject, CGFappearance, CGFshader} from '../../../lib/CGF.js';
 import {MyPlane} from './MyPlane.js'
 
 export class MyBillboard extends CGFobject {
-    constructor(scene, CGFtexture) {
+    constructor(scene, CGFtexture, windVector) {
         super(scene);
         this.texture = CGFtexture;
+        this.windVector = windVector;
 
         this.appearance = new CGFappearance(this.scene);
         this.appearance.setTexture(this.texture);

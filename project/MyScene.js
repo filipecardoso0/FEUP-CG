@@ -33,7 +33,7 @@ export class MyScene extends CGFscene {
 
     //Objects connected to MyInterface
     this.displayAxis = true;
-    this.scaleFactor = 1;
+    this.displayPanorama = true;
 
     this.enableTextures(true);
 
@@ -49,10 +49,15 @@ export class MyScene extends CGFscene {
     this.textureBillboard2 = new CGFtexture(this, "images/billboardtree2.png");
     this.textureBillboard3 = new CGFtexture(this, "images/billboardtree3.png");
 
-    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, [0,-87.5, 0], 20);
-    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, [60,-87.5, 0], "z", 20);
+    this.windVector = [1.0, 0.0, 0.0];
 
+    let treeGroupPatchCoordinates = [0,-87.5, 0];
+    let treeRowPatchCoordinates = [60,-87.5, 0];
     this.treeSpacing = 20;
+
+    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, this.windVector);
+    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, this.windVector);
+
     this.rowPosX = 86;
     this.rowPosZ = -37;
     this.groupPosX = -76;
@@ -107,7 +112,8 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.panoram.display();
+    if(this.displayPanorama)
+      this.panoram.display();
     
     this.terrain.display();
 
