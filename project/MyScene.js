@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyTerrain } from "./objects/MyTerrain.js";
 import { MyPanoram } from "./objects/MyPanoram.js";
+import { MyBillboard } from "./objects/MyBillboard.js";
 
 /**
  * MyScene
@@ -42,6 +43,9 @@ export class MyScene extends CGFscene {
 
     this.texturePanorama = new CGFtexture(this, "images/panorama4.jpg");
     this.panoram = new MyPanoram(this, this.texturePanorama);
+
+    this.textureBillboard = new CGFtexture(this, "images/billboardtree.png");
+    this.billboard = new MyBillboard(this, this.textureBillboard);
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -76,6 +80,8 @@ export class MyScene extends CGFscene {
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
 
+    this.setDefaultAppearance();
+
     // Draw axis
     if (this.displayAxis) this.axis.display();
 
@@ -84,6 +90,8 @@ export class MyScene extends CGFscene {
     this.panoram.display();
     
     this.terrain.display();
+
+    this.billboard.display();
 
 
     

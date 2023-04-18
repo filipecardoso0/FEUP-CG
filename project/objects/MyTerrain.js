@@ -13,7 +13,10 @@ export class MyTerrain extends CGFobject {
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
         this.shader = new CGFshader(this.scene.gl, "shaders/texture3.vert", "shaders/texture3.frag");
-        this.shader.setUniformsValues({ uSampler2: 1, uSampler3: 2, normScale: 2.5, textureColorWeigth: 0.3 });
+        //this.shader.setUniformsValues({ uSampler2: 1, uSampler3: 2, normScale: 2.5, textureColorWeigth: 0.3 });
+
+        // USE THIS SHADER TO DEBUG TREES ONLY
+        this.shader.setUniformsValues({ uSampler2: 1, uSampler3: 2, normScale: 0.0, textureColorWeigth: 0.3 });
 
         this.plane = new MyPlane(this.scene, 30);
     }
@@ -29,8 +32,8 @@ export class MyTerrain extends CGFobject {
         this.scene.scale(400,400,400);
         this.scene.rotate(-Math.PI/2.0,1,0,0);
         this.plane.display();
-        this.scene.setActiveShader(this.defaultShader);
         this.scene.popMatrix();
 
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }
