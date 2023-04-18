@@ -1,5 +1,5 @@
-import {CGFobject, CGFappearance, CGFshader} from '../../lib/CGF.js';
-import {MyPlane} from './2d/MyPlane.js'
+import {CGFobject, CGFappearance, CGFshader} from '../../../lib/CGF.js';
+import {MyPlane} from './MyPlane.js'
 
 export class MyBillboard extends CGFobject {
     constructor(scene, CGFtexture) {
@@ -43,7 +43,6 @@ export class MyBillboard extends CGFobject {
         this.plane.display();
 
         this.scene.popMatrix();
-
     }
 
 }

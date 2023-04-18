@@ -1,7 +1,8 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
-import { MyTerrain } from "./objects/MyTerrain.js";
+import { MyTerrain } from "./objects/3d/MyTerrain.js";
 import { MyPanoram } from "./objects/MyPanoram.js";
-import { MyBillboard } from "./objects/MyBillboard.js";
+import { MyTreeGroupPatch } from "./objects/MyTreeGroupPatch.js";
+import { MyTreeRowPatch } from "./objects/MyTreeRowPatch.js";
 
 /**
  * MyScene
@@ -44,20 +45,18 @@ export class MyScene extends CGFscene {
     this.texturePanorama = new CGFtexture(this, "images/panorama4.jpg");
     this.panoram = new MyPanoram(this, this.texturePanorama);
 
-    this.textureBillboard = new CGFtexture(this, "images/billboardtree.png");
-    
-    this.billboards = [
-      new MyBillboard(this, this.textureBillboard),
-      new MyBillboard(this, this.textureBillboard),
-      new MyBillboard(this, this.textureBillboard),
-    ];
+    this.textureBillboard1 = new CGFtexture(this, "images/billboardtree.png");
+    this.textureBillboard2 = new CGFtexture(this, "images/billboardtree.png");
+    this.textureBillboard3 = new CGFtexture(this, "images/billboardtree.png");
 
-    this.billboardPositions = [
-      [0,-87.5,10],
-      [20,-87.5,30],
-      [-30,-87.5,15],
-    ];
+    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, [0,-87.5, 0], 20);
+    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, [60,-87.5, 0], "z", 20);
 
+    this.treeSpacing = 20;
+    this.rowPosX = 86;
+    this.rowPosZ = -37;
+    this.groupPosX = -76;
+    this.groupPosZ = -46;
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -78,7 +77,7 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(0, -86, 60),
+      vec3.fromValues(0, -26, 90),
       vec3.fromValues(0, -86, 30)
     );
 
@@ -112,13 +111,8 @@ export class MyScene extends CGFscene {
     
     this.terrain.display();
 
-    for (let i = 0; i < this.billboards.length; i++) {
-      let x = this.billboardPositions[i][0];
-      let y = this.billboardPositions[i][1];
-      let z = this.billboardPositions[i][2];
-
-      this.billboards[i].display(x, y, z);
-    }
+    this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing);
+    this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing);
 
     // ---- END Primitive drawing section
   }
