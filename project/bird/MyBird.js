@@ -16,6 +16,8 @@ export class MyBird extends CGFobject {
         this.body_sphere = new MySphere(scene, 20, 10, [1,1,1]);
         this.neck = new MyFrustum(scene, 20, 10, 1);
         this.head = new MySphere(scene, 20, 10, [1,1,1]);
+        this.eye_R = new MySphere(scene, 20, 10, [0.1,0.1,0.1]);
+        this.eye_L = new MySphere(scene, 20, 10, [0.1,0.1,0.1]);
         this.beak = new MyCone(scene, 10, 10, [1,1,1]);
         this.tail_sphere = new MySphere(scene, 20, 10, [1,1,1]);
         this.tail_prism = new MyFrustum(scene, 4, 10, 1.7);
@@ -56,6 +58,19 @@ export class MyBird extends CGFobject {
         this.scene.translate(0,0.8,-0.9);
         this.scene.scale(0.3,0.3,0.4);
         this.head.display();
+        this.scene.popMatrix();
+
+        //Eyes
+        this.scene.pushMatrix();
+        this.scene.translate(-0.15,0.9,-1.2);
+        this.scene.scale(0.5, 0.5, 0.5);
+        this.eye_R.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.15,0.9,-1.2);
+        this.scene.scale(0.5, 0.5, 0.5);
+        this.eye_R.display();
         this.scene.popMatrix();
 
         //Beak  
