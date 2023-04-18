@@ -19,15 +19,16 @@ void main() {
 
 	vec4 colorTexture3 = texture2D(uSampler3, vec2(1.0, heigth));
 
-	heigth -= 0.5;
+	// heigth -= 0.5;
+	// float intensification = 1.5* heigth*heigth + 0.3;
 
-	float intensification = 1.5* heigth*heigth + 0.3;
-
-	// 1.5 * (x-0.5)^2 + 0.3
+	// F(x) = 1.5 * (x-0.5)^2 + 0.3
 	// This function shall give a desirable intensification effect (ranges from 0.3 to 0.675)
 	// It intensifies the heigth texture on the lowest/highests spots
 
-	color = mix(colorTexture1,colorTexture3, intensification);
+	// For now we will use the default texture
+
+	color = mix(colorTexture1,colorTexture3, textureColorWeigth);
 
 	gl_FragColor = color;
 }
