@@ -16,9 +16,8 @@ void main() {
 	vec3 offset=vec3(0.0,0.0,0.0);
 	
 	vTextureCoord = aTextureCoord;
-
-	if (texture2D(uSampler2, vec2(0.0,0.1)+vTextureCoord).b > 0.1)
-		offset=aVertexNormal*normScale*0.1;
+	
+	offset=aVertexNormal*normScale*0.1 * texture2D(uSampler2, vec2(1.0,1.0)+vTextureCoord).b; // offset is bound by the any of the components of the color (RGB)
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
 }

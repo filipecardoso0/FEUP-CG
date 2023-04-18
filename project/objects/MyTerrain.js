@@ -12,7 +12,7 @@ export class MyTerrain extends CGFobject {
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
         this.shader = new CGFshader(this.scene.gl, "shaders/texture3.vert", "shaders/texture3.frag");
-        this.shader.setUniformsValues({ uSampler2: 1, normScale: 30.0 });
+        this.shader.setUniformsValues({ uSampler2: 1, normScale: 2.5 });
 
         this.plane = new MyPlane(this.scene, 30);
     }
