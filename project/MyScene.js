@@ -118,7 +118,6 @@ export class MyScene extends CGFscene {
       let z = this.billboardPositions[i][2];
 
       this.billboards[i].display(x, y, z);
-      break;
     }
 
     // ---- END Primitive drawing section

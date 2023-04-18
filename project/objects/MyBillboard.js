@@ -14,7 +14,7 @@ export class MyBillboard extends CGFobject {
 
         this.plane = new MyPlane(this.scene, 30);
     }
-    followCamera(x, y, z) {
+    followCamera(x, z) {
         let vector1 = vec2.fromValues(this.scene.camera.position[0] - x, this.scene.camera.position[2] - z);
         let vector2 = vec2.fromValues(0, 1);
 
@@ -27,7 +27,7 @@ export class MyBillboard extends CGFobject {
         else 
             angle = Math.acos(vec2.dot(vector1, vector2));
 
-        this.scene.rotate( angle,0.0,1.0,0.0);     
+        this.scene.rotate(angle,0.0,1.0,0.0);     
     }    
     display(x, y, z) {
         this.scene.pushMatrix();
@@ -38,7 +38,7 @@ export class MyBillboard extends CGFobject {
 
         this.scene.scale(20,25,25);
 
-        this.followCamera(x, y, z);
+        this.followCamera(x, z);
 
         this.plane.display();
 
