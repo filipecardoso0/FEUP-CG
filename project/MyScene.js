@@ -67,7 +67,7 @@ export class MyScene extends CGFscene {
 
     // set the scene update period 
 		// (to invoke the update() method every 50ms or as close as possible to that )
-		this.setUpdatePeriod(100);
+		this.setUpdatePeriod(16);
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -126,7 +126,9 @@ export class MyScene extends CGFscene {
     this.terrain.display();
 
     this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
-    //this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
+    this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
+
+    this.setActiveShader(this.defaultShader);
 
     // ---- END Primitive drawing section
   }

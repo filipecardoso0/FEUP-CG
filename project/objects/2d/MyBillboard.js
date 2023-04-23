@@ -1,5 +1,5 @@
 import {CGFobject, CGFappearance, CGFshader} from '../../../lib/CGF.js';
-import {MyPlane} from './MyPlane.js'
+import {MyTreePlane} from './MyTreePlane.js'
 
 export class MyBillboard extends CGFobject {
     constructor(scene, CGFtexture, wind) {
@@ -15,11 +15,7 @@ export class MyBillboard extends CGFobject {
         this.shader = new CGFshader(this.scene.gl, "shaders/billboardTree.vert", "shaders/billboardTree.frag");
         this.shader.setUniformsValues({windAngle: this.wind[0], windSpeed: this.wind[1], isWind: this.wind[2]});
 
-        this.plane = new MyPlane(this.scene, 30);
-
-        // set the scene update period 
-		// (to invoke the update() method every 50ms or as close as possible to that )
-		this.scene.setUpdatePeriod(33);
+        this.plane = new MyTreePlane(this.scene, 30);
     }
     followCamera(x, y, z) {
         let vector1 = vec2.fromValues(this.scene.camera.position[0] - x, this.scene.camera.position[2] - z);
