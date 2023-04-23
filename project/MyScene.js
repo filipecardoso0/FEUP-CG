@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyTerrain } from "./objects/3d/MyTerrain.js";
 import { MyPanoram } from "./objects/MyPanoram.js";
 import { MyTreeGroupPatch } from "./objects/MyTreeGroupPatch.js";
@@ -29,10 +29,8 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     //Initialize scene objects
-    this.axis = new CGFaxis(this);
 
     //Objects connected to MyInterface
-    this.displayAxis = true;
     this.displayPanorama = true;
 
     this.enableTextures(true);
@@ -49,19 +47,27 @@ export class MyScene extends CGFscene {
     this.textureBillboard2 = new CGFtexture(this, "images/billboardtree2.png");
     this.textureBillboard3 = new CGFtexture(this, "images/billboardtree3.png");
 
-    this.windVector = [1.0, 0.0, 0.0];
+    this.windAngle = 0;
+    this.windSpeed = 0.01;
+    this.isWind = true;
+    // This is the expected use of the wind vector ***
+    // this.windVector = [Math.cos(this.windAngle), 0, Math.sin(this.windAngle)];
 
     let treeGroupPatchCoordinates = [0,-87.5, 0];
     let treeRowPatchCoordinates = [60,-87.5, 0];
     this.treeSpacing = 20;
 
-    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, this.windVector);
-    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, this.windVector);
+    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
+    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
 
     this.rowPosX = 86;
     this.rowPosZ = -37;
     this.groupPosX = -76;
     this.groupPosZ = -46;
+
+    // set the scene update period 
+		// (to invoke the update() method every 50ms or as close as possible to that )
+		this.setUpdatePeriod(100);
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -93,6 +99,11 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+  // called periodically (as per setUpdatePeriod() in init())
+	update(t) {
+    this.treeGroupPatch.update(t);
+    this.treeRowPatch.update(t);
+}
   display() {
     this.camera.fov = this.fovFactor;
     // ---- BEGIN Background, camera and axis setup
@@ -107,9 +118,6 @@ export class MyScene extends CGFscene {
 
     this.setDefaultAppearance();
 
-    // Draw axis
-    if (this.displayAxis) this.axis.display();
-
     // ---- BEGIN Primitive drawing section
 
     if(this.displayPanorama)
@@ -117,8 +125,8 @@ export class MyScene extends CGFscene {
     
     this.terrain.display();
 
-    this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing);
-    this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing);
+    this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
+    //this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
 
     // ---- END Primitive drawing section
   }

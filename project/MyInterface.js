@@ -17,9 +17,6 @@ export class MyInterface extends CGFinterface {
         // https://github.com/dataarts/dat.gui/blob/master/API.md
         this.gui = new dat.GUI();
 
-        //Checkbox element in GUI
-        this.gui.add(this.scene, 'displayAxis').name('Display Axis');
-
         //Slider element in GUI
         this.gui.add(this.scene, 'displayPanorama').name('Display Panorama');
 
@@ -30,6 +27,10 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'rowPosZ', -100, 100).name("TreeRow Z");
         this.gui.add(this.scene, 'groupPosX', -100, 100).name("TreeGroup X");
         this.gui.add(this.scene, 'groupPosZ', -100, 100).name("TreeGroup Z");
+
+        this.gui.add(this.scene, 'windAngle', 0, 2*Math.PI).name("Wind Angle");
+        this.gui.add(this.scene, 'windSpeed', 0, 0.5).name("Wind Speed");
+        this.gui.add(this.scene, 'isWind').name("Wind");
 
 
         return true;

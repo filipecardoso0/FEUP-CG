@@ -18,6 +18,7 @@ export class MyPanoram extends CGFobject {
     display() {
         this.scene.pushMatrix();
         this.appearance.apply();
+
         this.sphere.display();
         this.scene.popMatrix();
     }
