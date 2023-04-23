@@ -10,6 +10,8 @@ uniform sampler2D uSampler;
 uniform sampler2D uSampler2;
 uniform sampler2D uSampler3;
 
+uniform float ambientLight;
+
 void main() {
 	vec4 colorTexture1 = texture2D(uSampler, vTextureCoord);
 	vec4 colorTexture2 = texture2D(uSampler2, vTextureCoord);
@@ -29,6 +31,10 @@ void main() {
 	// For now we will use the default texture
 
 	color = mix(colorTexture1,colorTexture3, textureColorWeigth);
+
+	//color *= ambientLight;
+
+	color = vec4(color.rgb * ambientLight, color.a);
 
 	gl_FragColor = color;
 }

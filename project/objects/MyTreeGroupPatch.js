@@ -54,9 +54,9 @@ export class MyTreeGroupPatch extends CGFobject {
             ];
         }
     }
-    update(t) {
+    update(t, ambientR, ambientG, ambientB) {
         for (let i = 0; i < 9; i++) {
-            this.billboards[i].update(t);
+            this.billboards[i].update(t, ambientR, ambientG, ambientB);
         }
     }
     display(x, y, z, spacing, wind) {

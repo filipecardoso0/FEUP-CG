@@ -43,18 +43,12 @@ export class MyBillboard extends CGFobject {
         this.scene.rotate(-angle,0.0,1.0,0.0);   
     } 
     // called periodically (as per setUpdatePeriod() in init())
-	update(t) {
+	update(t, ambientR, ambientG, ambientB) {
         // Dividing the time by 100 "slows down" the variation (i.e. in 100 ms timeFactor increases 1 unit).
         // Doing the modulus (%) by 100 makes the timeFactor loop between 0 and 99
         // ( so the loop period of timeFactor is 100 times 100 ms = 10s ; the actual animation loop depends on how timeFactor is used in the shader )
-        this.shader.setUniformsValues({ sinusoidalWaveValue: Math.sin(2*Math.PI * (t / 2000)) });
+        this.shader.setUniformsValues({ sinusoidalWaveValue: Math.sin(2*Math.PI * (t / 2000)), ambientLight: ambientR });
 	}
-    
-    makeItWind() {
-        let someWind = vec3.fromValues(this.wind[1] * Math.cos(this.wind[0]), 0.0, this.wind[1] * Math.sin(this.wind[0]));
-
-        //this.scene.rotate(someWind[0], 1.0, 0.0, 0.0);
-    }
     display(x, y, z, wind) {
         this.wind = wind;
         this.shader.setUniformsValues({windAngle: this.wind[0], windSpeed: this.wind[1], isWind: this.wind[2], yPos: y - this.heigth});

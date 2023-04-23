@@ -7,6 +7,7 @@ varying vec2 vTextureCoord;
 uniform float textureColorWeigth;
 
 uniform sampler2D uSampler;
+uniform float ambientLight;
 
 
 void main() {
@@ -16,7 +17,7 @@ void main() {
 	if(colorTexture1.a < 1.0) {
 		discard;
 	} else {
-		color = colorTexture1;
+		color = vec4(colorTexture1.rgb * ambientLight, 1.0);
 	}
 
 	gl_FragColor = color;

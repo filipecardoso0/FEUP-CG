@@ -57,9 +57,9 @@ export class MyTreeRowPatch extends CGFobject {
             ];
         }
     }
-    update(t) {
+    update(t, ambientR, ambientG, ambientB) {
         for (let i = 0; i < 6; i++) {
-            this.billboards[i].update(t);
+            this.billboards[i].update(t, ambientR, ambientG, ambientB);
         }
     }
     display(x, y, z, spacing, wind) {

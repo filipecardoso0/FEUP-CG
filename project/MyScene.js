@@ -20,6 +20,10 @@ export class MyScene extends CGFscene {
 
     this.fovFactor = 1.25;
 
+    this.ambientR = 1.0;
+    this.ambientG = 1.0;
+    this.ambientB = 1.0;
+
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
@@ -48,8 +52,9 @@ export class MyScene extends CGFscene {
     this.textureBillboard3 = new CGFtexture(this, "images/billboardtree3.png");
 
     this.windAngle = 0;
-    this.windSpeed = 0.01;
+    this.windStrength = 0.01;
     this.isWind = true;
+
     // This is the expected use of the wind vector ***
     // this.windVector = [Math.cos(this.windAngle), 0, Math.sin(this.windAngle)];
 
@@ -57,8 +62,16 @@ export class MyScene extends CGFscene {
     let treeRowPatchCoordinates = [60,-87.5, 0];
     this.treeSpacing = 20;
 
-    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
-    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
+    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
+    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
+
+    this.trees = [
+      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
+      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
+      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
+      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
+      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
+    ]
 
     this.rowPosX = 86;
     this.rowPosZ = -37;
@@ -94,16 +107,35 @@ export class MyScene extends CGFscene {
 
   }
   setDefaultAppearance() {
-    this.setAmbient(1, 1, 1, 1.0);
+    this.setAmbient(1.0, 1.0, 1.0, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
   // called periodically (as per setUpdatePeriod() in init())
 	update(t) {
-    this.treeGroupPatch.update(t);
-    this.treeRowPatch.update(t);
-}
+    let ambientR = 1.0;
+    let ambientG = 1.0;
+    let ambientB = 1.0;
+
+    let equation = 0.8*Math.sin(t/5000) + 1.0;
+
+    if(equation > 1.0) {
+        equation = 1.0;
+    } else if (equation < 0.55) {
+        equation = 0.55;
+    } 
+
+    // TODO add some logic to change the ambient light, for now this may suffice
+    ambientR = equation;
+    ambientG = equation;
+    ambientB = equation;
+
+    this.panoram.update(ambientR, ambientG, ambientB);
+    this.terrain.update(ambientR);
+    this.treeGroupPatch.update(t, ambientR, ambientG, ambientB);
+    this.treeRowPatch.update(t, ambientR, ambientG, ambientB);
+  }
   display() {
     this.camera.fov = this.fovFactor;
     // ---- BEGIN Background, camera and axis setup
@@ -125,8 +157,12 @@ export class MyScene extends CGFscene {
     
     this.terrain.display();
 
-    this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
-    this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windSpeed, this.isWind]);
+    this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
+    //this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
+
+    for(let i = 0; i < this.trees.length; i++){ // TO test
+      this.trees[i].display(this.rowPosX - this.treeSpacing*i, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
+    }
 
     this.setActiveShader(this.defaultShader);
 

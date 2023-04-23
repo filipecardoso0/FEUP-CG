@@ -15,6 +15,9 @@ export class MyPanoram extends CGFobject {
 
         this.sphere = new MySphere(this.scene, 24 , 24, 200);
     }
+    update(ambientR, ambientG, ambientB) {
+        this.appearance.setDiffuse(ambientR, ambientG, ambientB, 1.0);
+    }
     display() {
         this.scene.pushMatrix();
         this.appearance.apply();

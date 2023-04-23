@@ -29,8 +29,12 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'groupPosZ', -100, 100).name("TreeGroup Z");
 
         this.gui.add(this.scene, 'windAngle', 0, 2*Math.PI).name("Wind Angle");
-        this.gui.add(this.scene, 'windSpeed', 0, 0.5).name("Wind Speed");
+        this.gui.add(this.scene, 'windStrength', 0, 0.5).name("Wind Strength");
         this.gui.add(this.scene, 'isWind').name("Wind");
+
+        this.gui.add(this.scene, 'ambientR', 0, 1).name("Ambient R");
+        this.gui.add(this.scene, 'ambientG', 0, 1).name("Ambient G");
+        this.gui.add(this.scene, 'ambientB', 0, 1).name("Ambient B");
 
 
         return true;
