@@ -2,7 +2,7 @@ import {CGFobject, CGFappearance, CGFshader} from '../../../lib/CGF.js';
 import {MyTreePlane} from './MyTreePlane.js'
 
 export class MyBillboard extends CGFobject {
-    constructor(scene, CGFtexture, wind) {
+    constructor(scene, CGFtexture, wind, CGFHeightMapTexture) {
         super(scene);
         this.texture = CGFtexture;
         this.wind = wind;
@@ -12,8 +12,10 @@ export class MyBillboard extends CGFobject {
         this.appearance.setTexture(this.texture);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.textureHeigthMap = CGFHeightMapTexture;
+
         this.shader = new CGFshader(this.scene.gl, "shaders/billboardTree.vert", "shaders/billboardTree.frag");
-        this.shader.setUniformsValues({windAngle: this.wind[0], windSpeed: this.wind[1], isWind: this.wind[2]});
+        this.shader.setUniformsValues({windAngle: this.wind[0], windSpeed: this.wind[1], isWind: this.wind[2], heigthMapSampler: 1, heigthMapScale : 0.3, xPos: 0, zPos: 0});
 
         this.plane = new MyTreePlane(this.scene, 30);
     }
@@ -44,17 +46,17 @@ export class MyBillboard extends CGFobject {
     } 
     // called periodically (as per setUpdatePeriod() in init())
 	update(t, ambientR, ambientG, ambientB) {
-        // Dividing the time by 100 "slows down" the variation (i.e. in 100 ms timeFactor increases 1 unit).
-        // Doing the modulus (%) by 100 makes the timeFactor loop between 0 and 99
-        // ( so the loop period of timeFactor is 100 times 100 ms = 10s ; the actual animation loop depends on how timeFactor is used in the shader )
-        this.shader.setUniformsValues({ sinusoidalWaveValue: Math.sin(2*Math.PI * (t / 2000)), ambientLight: ambientR });
+         this.shader.setUniformsValues({ sinusoidalWaveValue: Math.sin(2*Math.PI * (t / 2000)), ambientLight: ambientR });
 	}
     display(x, y, z, wind) {
         this.wind = wind;
-        this.shader.setUniformsValues({windAngle: this.wind[0], windSpeed: this.wind[1], isWind: this.wind[2], yPos: y - this.heigth});
+        this.scene.setActiveShader(this.shader);
+        this.shader.setUniformsValues({windAngle: this.wind[0], windSpeed: this.wind[1], isWind: this.wind[2], yPos: y - this.heigth, xPos: x/400.0, zPos: z/400.0});
 
         this.scene.pushMatrix();
-        this.scene.setActiveShader(this.shader);
+
+        this.textureHeigthMap.bind(1);
+
         this.appearance.apply();
 
         this.followCamera(x, y, z);

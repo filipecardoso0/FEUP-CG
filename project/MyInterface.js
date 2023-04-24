@@ -32,11 +32,6 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'windStrength', 0, 0.5).name("Wind Strength");
         this.gui.add(this.scene, 'isWind').name("Wind");
 
-        this.gui.add(this.scene, 'ambientR', 0, 1).name("Ambient R");
-        this.gui.add(this.scene, 'ambientG', 0, 1).name("Ambient G");
-        this.gui.add(this.scene, 'ambientB', 0, 1).name("Ambient B");
-
-
         return true;
     }
 }

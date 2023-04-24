@@ -20,10 +20,6 @@ export class MyScene extends CGFscene {
 
     this.fovFactor = 1.25;
 
-    this.ambientR = 1.0;
-    this.ambientG = 1.0;
-    this.ambientB = 1.0;
-
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
@@ -62,16 +58,8 @@ export class MyScene extends CGFscene {
     let treeRowPatchCoordinates = [60,-87.5, 0];
     this.treeSpacing = 20;
 
-    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
-    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
-
-    this.trees = [
-      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
-      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
-      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
-      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
-      new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]),
-    ]
+    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind], this.texture2);
+    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind], this.texture2);
 
     this.rowPosX = 86;
     this.rowPosZ = -37;
@@ -159,10 +147,6 @@ export class MyScene extends CGFscene {
 
     this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
     //this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
-
-    for(let i = 0; i < this.trees.length; i++){ // TO test
-      this.trees[i].display(this.rowPosX - this.treeSpacing*i, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
-    }
 
     this.setActiveShader(this.defaultShader);
 

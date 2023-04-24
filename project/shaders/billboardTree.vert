@@ -9,13 +9,19 @@ uniform mat4 uNMatrix;
 
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler2;
+
+uniform sampler2D heigthMapSampler;
+uniform float heigthMapScale;
+
+uniform float xPos;
+uniform float yPos;
+uniform float zPos;
+
 // wind
 uniform float windSpeed;
 uniform float windAngle;
 uniform float cameraAngle;
 uniform bool isWind;
-
-uniform float yPos;
 
 uniform float sinusoidalWaveValue;
 
@@ -26,15 +32,25 @@ void main() {
 
 	vec3 offset=vec3(0.0,0.0,0.0);
 
+	//offset = aVertexNormal*heigthMapScale*0.1 * texture2D(heigthMapSampler, vec2(1.0,1.0)+vTextureCoord).b;
+
 	if(isWind){
 		offset.x = windSpeed * sin(windAngle - cameraAngle) * sinusoidalWaveValue;
 		offset.z = windSpeed * cos(windAngle - cameraAngle) * sinusoidalWaveValue;
 
 		offset *= (aVertexPosition.y + 0.5); 
 
-		gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition.x + offset.x, aVertexPosition.y, aVertexPosition.z + offset.z, 1.0);
-	} else {
-		gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0); 
 	}
+
+	//offset.y = 16.0*heigthMapScale * texture2D(heigthMapSampler, vec2(xPos,zPos)).b;
+	//offset.y = test.b;
+
+	offset.y = 2.0;
+
+	//offset.y = yPos/20.0;
+
+	//offset.y = aVertexPosition.y + 0.1 * heigthMapScale * texture2D(uSampler2, vec2(1.0,1.0)+vec2(xPos,zPos)).b;
+
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
 }
 

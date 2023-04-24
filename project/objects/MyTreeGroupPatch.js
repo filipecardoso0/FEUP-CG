@@ -2,7 +2,7 @@ import {CGFobject, CGFappearance} from '../../lib/CGF.js';
 import {MyBillboard} from './2d/MyBillboard.js';
 
 export class MyTreeGroupPatch extends CGFobject {
-    constructor(scene, CGFtexture, CGFtexture2, CGFtexture3, coordinates, spacing, wind) {
+    constructor(scene, CGFtexture, CGFtexture2, CGFtexture3, coordinates, spacing, wind, CGFHeigthMapTexture) {
         super(scene);
         this.spacing = spacing;
         this.textures = [
@@ -13,7 +13,7 @@ export class MyTreeGroupPatch extends CGFobject {
 
         this.billboards = [];
         for (let i = 0; i < 9; i++) {
-            this.billboards.push(new MyBillboard(this.scene, this.textures[Math.floor(Math.random()*3)], wind));
+            this.billboards.push(new MyBillboard(this.scene, this.textures[Math.floor(Math.random()*3)], wind, CGFHeigthMapTexture));
         }
         this.coordinatesOffset = [
             [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
