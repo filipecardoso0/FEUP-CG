@@ -1,6 +1,8 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyTerrain } from "./objects/MyTerrain.js";
 import { MyPanoram } from "./objects/MyPanoram.js";
+import { MyBirdEgg } from "./objects/MyBirdEgg.js"; 
+import { MyNest } from "./objects/MyNest.js";
 
 /**
  * MyScene
@@ -41,6 +43,19 @@ export class MyScene extends CGFscene {
 
     this.texture3 = new CGFtexture(this, "images/panorama4.jpg");
     this.panoram = new MyPanoram(this, this.texture3);
+
+    this.birdeggtexture = new CGFtexture(this, "images/egg.jpg"); 
+    this.birdegg1 = new MyBirdEgg(this, this.birdeggtexture);
+    this.birdegg2 = new MyBirdEgg(this, this.birdeggtexture); 
+    this.birdegg3 = new MyBirdEgg(this, this.birdeggtexture); 
+    this.birdegg4 = new MyBirdEgg(this, this.birdeggtexture); 
+
+    this.birdeggs = [];
+    this.birdeggs.push(this.birdegg1, this.birdegg2, this.birdegg3, this.birdegg4); 
+
+    this.birdnesttexture = new CGFtexture(this, "images/nest.jpg");
+    this.birdnest = new MyNest(this, this.birdnesttexture); 
+    
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -84,6 +99,13 @@ export class MyScene extends CGFscene {
 
     this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
     this.panoram.display();
+    
+    this.birdeggs[0].display(25, -100, 25)
+    this.birdeggs[1].display(45, -100, 100); 
+    this.birdeggs[2].display(100, -100, 30); 
+    this.birdeggs[3].display(100, -100, -50); 
+
+    this.birdnest.display(-50, -100, -30); 
     
     // ---- END Primitive drawing section
   }
