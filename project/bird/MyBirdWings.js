@@ -10,6 +10,11 @@ export class MyBirdWings extends CGFobject {
         this.wing_L = new MyBirdWing(scene, 1);
     }
 
+    update(t){
+        this.wing_R.update(t);
+        this.wing_L.update(t);
+    }
+
     display() {
         //Wings
         // this.wing_L.enableNormalViz();

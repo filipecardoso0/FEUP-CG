@@ -34,6 +34,7 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
+    this.birdSpeed = 2;
 
     this.enableTextures(true);
 
@@ -47,7 +48,7 @@ export class MyScene extends CGFscene {
     this.appearance2.setTexture(this.texture2);
     this.appearance2.setTextureWrap('REPEAT', 'REPEAT');
 
-
+    this.setUpdatePeriod(50);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -70,6 +71,10 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+  // called periodically (as per setUpdatePeriod() in init())
+	update(t) {
+    this.bird.update(t);
+	}
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
