@@ -22,20 +22,50 @@ export class MyBird extends CGFobject {
         this.appearance.setSpecular(0.1, 0.1, 0.1, 1);
         this.appearance.setShininess(10.0);
 
-        this.speed = 1;
+        this.angle = 0;
+        this.speed = this.scene.birdSpeed;
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+        
         this.animVal = 0;
     }
 
     update(t){
-        //this.animVal = 0.5 * Math.sin(t/1000 * Math.PI * this.scene.birdSpeed);
+        this.animVal = 0.2 * Math.cos(t/1000 * Math.PI * 0.47 * this.scene.birdSpeed);
         this.wings.update(t);
+
+        this.x =  this.x + this.scene.birdSpeed * Math.sin(this.angle);
+        this.z = this.z + this.scene.birdSpeed * Math.cos(this.angle);
+        console.log(this.angle);
+
+        if (this.scene.gui.isKeyPressed("KeyA")){
+            this.turn(0.1);
+        }
+        if (this.scene.gui.isKeyPressed("KeyD")){
+            this.turn(-0.1);
+        }
+
     }
+
+    turn(v){
+        this.angle += v;
+    }
+
+    accelerate(v){
+
+    }
+    reset(){}
 
     display() {
         this.appearance.apply();
-
         this.scene.pushMatrix();
+        this.scene.translate(this.x, this.y, this.z);
+        this.scene.rotate(this.angle, 0, 1, 0);
+        this.scene.translate(-this.x, -this.y, -this.z);
+        this.scene.translate(this.x, this.y, this.z);
         this.scene.translate(0, this.animVal, 0);
+        //this.scene.scale(1,1,-1);
         this.body.display();
         this.head.display();
         this.tail.display();
