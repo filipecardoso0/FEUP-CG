@@ -17,17 +17,23 @@ export class MyBirdWings extends CGFobject {
 
     display() {
         //Wings
-        // this.wing_L.enableNormalViz();
-        // this.wing_R.enableNormalViz();
         this.scene.pushMatrix();
-        this.scene.translate(-0.8, -0.8, -1);
+        this.scene.translate(0.8, 0.2, 0);
+        this.scene.translate(0,0,-3.5);
+        this.scene.rotate(-Math.PI/30, 0, 1, 0);
+        this.scene.translate(0,0,3.5);
         this.wing_R.display();
         this.scene.popMatrix();
+
         this.scene.pushMatrix();
         this.scene.scale(-1,1,1);
-        this.scene.translate(-0.8, -0.8, -1);
+        this.scene.translate(0.8, 0.2, 0);
+        this.scene.translate(0,0,-3.5);
+        this.scene.rotate(-Math.PI/30, 0, 1, 0);
+        this.scene.translate(0,0,3.5);
         this.wing_L.display();
         this.scene.popMatrix();
+
     }
 
 }
