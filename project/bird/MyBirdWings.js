@@ -10,9 +10,9 @@ export class MyBirdWings extends CGFobject {
         this.wing_L = new MyBirdWing(scene, 1);
     }
 
-    update(t){
-        this.wing_R.update(t);
-        this.wing_L.update(t);
+    update(t, speed){
+        this.wing_R.update(t, speed);
+        this.wing_L.update(t, speed);
     }
 
     display() {
