@@ -52,7 +52,6 @@ export class MyScene extends CGFscene {
     this.texture3 = new CGFtexture(this, "images/panorama4.jpg");
     this.panoram = new MyPanoram(this, this.texture3);
 
-<<<<<<< HEAD
     this.birdeggtexture = new CGFtexture(this, "images/egg.jpg"); 
     this.birdegg1 = new MyBirdEgg(this, this.birdeggtexture);
     this.birdegg2 = new MyBirdEgg(this, this.birdeggtexture); 
@@ -64,12 +63,8 @@ export class MyScene extends CGFscene {
 
     this.birdnesttexture = new CGFtexture(this, "images/nest.jpg");
     this.birdnest = new MyNest(this, this.birdnesttexture); 
-    
-=======
-
     this.setUpdatePeriod(50);
 
->>>>>>> master
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
