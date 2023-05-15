@@ -13,8 +13,15 @@ export class MyBirdWing extends CGFobject{
     }
 
     update(t, speed){
-        this.animWingA = 0.5 * Math.sin(t/1000 * Math.PI * speed * 4);
-        this.animWingB = 0.6 * Math.sin(t/1000 * Math.PI * speed * 4);
+        if (speed == 0){
+            this.animWingA = 0.5 * Math.sin(t/1000 * Math.PI *2);
+            this.animWingB = 0.6 * Math.sin(t/1000 * Math.PI *2);
+        }
+        else{
+            var oscilation = (-speed) + 2;
+            this.animWingA = 0.5 * Math.sin(t/1000 * Math.PI * oscilation);
+            this.animWingB = 0.6 * Math.sin(t/1000 * Math.PI * oscilation);
+        }
     }
 
     display() {

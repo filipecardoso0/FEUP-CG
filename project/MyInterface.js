@@ -25,7 +25,7 @@ export class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'fovFactor', 0.5, 2).name("FOV");
 
-        this.gui.add(this.scene, 'birdSpeed', 0.1, 10).name('Bird Speed');
+        this.gui.add(this.scene, 'birdSpeed', 0, 2).name('Bird Speed');
 
         this.initKeys();
         return true;

@@ -38,7 +38,7 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
-    this.birdSpeed = 0.1;
+    this.birdSpeed = 0;
 
     this.enableTextures(true);
 
@@ -78,7 +78,7 @@ export class MyScene extends CGFscene {
   // called periodically (as per setUpdatePeriod() in init())
 	update(t) {
     this.checkKeys();
-    this.bird.update(t);
+    this.birdSpeed = this.bird.update(t);
 	}
   display() {
     this.camera.fov = this.fovFactor;

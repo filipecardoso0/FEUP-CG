@@ -22,22 +22,27 @@ export class MyBird extends CGFobject {
         this.appearance.setSpecular(0.1, 0.1, 0.1, 1);
         this.appearance.setShininess(10.0);
 
+        this.maxSpeed = 2;
         this.angle = 0;
         this.speed = 0;
         this.x = 0;
         this.y = 0;
         this.z = 0;
-        
-        this.animVal = 0;
     }
 
-    update(t, speed){
-        this.animVal = 0.3 * Math.cos(t/1000 * Math.PI * this.speed * 5);
+    update(t){
+        if (this.speed == 0){
+            this.y = 0.3 * Math.cos(t/1000 * (Math.PI * 2));
+        } else {
+            var maxOscilation = 0.4;
+            var oscilation = maxOscilation/this.speed/2 < -maxOscilation ? maxOscilation : maxOscilation/this.speed/2;
+            this.y = oscilation * Math.cos(t/1000 * (Math.PI * 2));
+        }
         this.wings.update(t, this.speed);
 
         this.x =  this.x + this.speed * Math.sin(this.angle);
         this.z = this.z + this.speed * Math.cos(this.angle);
-        console.log(this.animVal);
+
         if (this.scene.gui.isKeyPressed("KeyA")){
             this.turn(0.1);
         }
@@ -53,6 +58,8 @@ export class MyBird extends CGFobject {
         if (this.scene.gui.isKeyPressed("KeyR")){
             this.reset();
         }
+        console.log(this.speed);
+        return this.speed;
     }
 
     turn(v){
@@ -61,8 +68,10 @@ export class MyBird extends CGFobject {
 
     accelerate(v){
         this.speed += v;
-        if (this.speed > 0){
+        if (this.speed > 0 ){
             this.speed = 0;
+        }else if (this.speed < -this.maxSpeed){
+            this.speed = -this.maxSpeed;
         }
     }
     reset(){
@@ -80,7 +89,7 @@ export class MyBird extends CGFobject {
         this.scene.rotate(this.angle, 0, 1, 0);
         this.scene.translate(-this.x, -this.y, -this.z);
         this.scene.translate(this.x, this.y, this.z);
-        this.scene.translate(0, this.animVal, 0);
+        this.scene.translate(0, this.y, 0);
         //this.scene.scale(1,1,-1);
         this.body.display();
         this.head.display();
