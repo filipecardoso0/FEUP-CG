@@ -22,7 +22,7 @@ export class MyBird extends CGFobject {
         this.appearance.setSpecular(0.1, 0.1, 0.1, 1);
         this.appearance.setShininess(10.0);
 
-        this.maxSpeed = 2;
+        this.maxSpeed = 2 ;
         this.angle = 0;
         this.speed = 0;
         this.x = 0;
@@ -30,36 +30,35 @@ export class MyBird extends CGFobject {
         this.z = 0;
     }
 
-    update(t){
+    update(t, speedFactor){
         if (this.speed == 0){
-            this.y = 0.3 * Math.cos(t/1000 * (Math.PI * 2));
+            this.y = 0.3 * Math.cos(t/1000 * (Math.PI * 2) * speedFactor);
         } else {
             var maxOscilation = 0.4;
             var oscilation = maxOscilation/this.speed/2 < -maxOscilation ? maxOscilation : maxOscilation/this.speed/2;
-            this.y = oscilation * Math.cos(t/1000 * (Math.PI * 2));
+            this.y = oscilation * Math.cos(t/1000 * (Math.PI * 2) * speedFactor);
         }
-        this.wings.update(t, this.speed);
+        this.wings.update(t, this.speed, speedFactor);
 
         this.x =  this.x + this.speed * Math.sin(this.angle);
         this.z = this.z + this.speed * Math.cos(this.angle);
 
         if (this.scene.gui.isKeyPressed("KeyA")){
-            this.turn(0.1);
+            this.turn(0.1 * speedFactor);
         }
         if (this.scene.gui.isKeyPressed("KeyD")){
-            this.turn(-0.1);
+            this.turn(-0.1 * speedFactor);
         }
         if (this.scene.gui.isKeyPressed("KeyW")){
-            this.accelerate(-0.1);
+            this.accelerate(-0.1 * speedFactor);
         }
         if (this.scene.gui.isKeyPressed("KeyS")){
-            this.accelerate(0.1);
+            this.accelerate(0.1 * speedFactor);
         }
         if (this.scene.gui.isKeyPressed("KeyR")){
             this.reset();
         }
         console.log(this.speed);
-        return this.speed;
     }
 
     turn(v){
