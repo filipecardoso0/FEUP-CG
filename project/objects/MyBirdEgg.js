@@ -1,5 +1,4 @@
 import {CGFobject, CGFappearance} from '../../lib/CGF.js';
-import { MyHollowOutsideHalfSphere } from "./3d/MyHollowOutsideHalfSphere.js";
 import { MyHollowOutsideHalfSphereTop } from './3d/MyHollowOutsideHalfSphereTop.js';
 
 export class MyBirdEgg extends CGFobject {
@@ -19,11 +18,11 @@ export class MyBirdEgg extends CGFobject {
     }
 
     display(x, y, z) {
+
         //Top Part of the Egg
         this.scene.pushMatrix();
         this.appearance.apply();
         this.scene.translate(x, y+this.topsphere.radius, z); 
-        this.scene.rotate(Math.PI, 1, 0, 0);
         this.scene.scale(1, 1.5, 1); 
         this.topsphere.display(); 
         this.scene.popMatrix();
@@ -32,6 +31,7 @@ export class MyBirdEgg extends CGFobject {
         this.scene.pushMatrix(); 
         this.appearance.apply();
         this.scene.translate(x, y+this.topsphere.radius, z); 
+        this.scene.rotate(Math.PI, 1, 0, 0);
         this.bottomsphere.display(); 
         this.scene.popMatrix(); 
     }
