@@ -54,8 +54,10 @@ export class MyScene extends CGFscene {
 
     this.treeSpacing = 20;
     this.rowPosX = 86;
+    this.rowPosY = -42.0;
     this.rowPosZ = -37;
     this.groupPosX = -76;
+    this.groupPosY = -42.0;
     this.groupPosZ = -46;
   }
   initLights() {
@@ -111,8 +113,8 @@ export class MyScene extends CGFscene {
     
     this.terrain.display();
 
-    this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing);
-    this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing);
+    this.treeGroupPatch.display(this.groupPosX, this.groupPosY, this.groupPosZ, this.treeSpacing);
+    this.treeRowPatch.display(this.rowPosX, this.rowPosY, this.rowPosZ, this.treeSpacing);
 
     // ---- END Primitive drawing section
   }
