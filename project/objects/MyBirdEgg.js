@@ -2,9 +2,12 @@ import {CGFobject, CGFappearance} from '../../lib/CGF.js';
 import { MyHollowOutsideHalfSphereTop } from './3d/MyHollowOutsideHalfSphereTop.js';
 
 export class MyBirdEgg extends CGFobject {
-    constructor(scene, CGFtexture) {
+    constructor(scene, CGFtexture, x, y, z) {
         super(scene);
         this.texture = CGFtexture;
+        this.x = x; 
+        this.y = y; 
+        this.z = z; 
         this.appearance = new CGFappearance(this.scene);
         this.appearance.setAmbient(1.0, 1.0, 1.0, 1.0);
 		this.appearance.setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -17,12 +20,13 @@ export class MyBirdEgg extends CGFobject {
         this.bottomsphere = new MyHollowOutsideHalfSphereTop(this.scene, 10, 5, 5);
     }
 
-    display(x, y, z) {
+
+    display() {
 
         //Top Part of the Egg
         this.scene.pushMatrix();
         this.appearance.apply();
-        this.scene.translate(x, y+this.topsphere.radius, z); 
+        this.scene.translate(this.x, this.y+this.topsphere.radius, this.z); 
         this.scene.scale(1, 1.5, 1); 
         this.topsphere.display(); 
         this.scene.popMatrix();
@@ -30,9 +34,22 @@ export class MyBirdEgg extends CGFobject {
         //Bottom Part of the Egg
         this.scene.pushMatrix(); 
         this.appearance.apply();
-        this.scene.translate(x, y+this.topsphere.radius, z); 
+        this.scene.translate(this.x, this.y+this.topsphere.radius, this.z); 
         this.scene.rotate(Math.PI, 1, 0, 0);
         this.bottomsphere.display(); 
         this.scene.popMatrix(); 
     }
+
+    setX(x){
+        this.x = x; 
+    }
+    
+    setY(y){
+        this.y = y; 
+    }
+
+    setZ(z){
+        this.z = z; 
+    }
+
 }

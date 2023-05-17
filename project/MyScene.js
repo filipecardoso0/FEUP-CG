@@ -35,7 +35,22 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 24 , 12, 1);
-    this.bird = new MyBird(this, 1);
+
+    //Bird Eggs and Nest
+    this.birdeggtexture = new CGFtexture(this, "images/egg.jpg"); 
+    this.birdegg1 = new MyBirdEgg(this, this.birdeggtexture, 25, -100, 25);
+    this.birdegg2 = new MyBirdEgg(this, this.birdeggtexture, 45, -100, 100); 
+    this.birdegg3 = new MyBirdEgg(this, this.birdeggtexture, 100, -100, 30); 
+    this.birdegg4 = new MyBirdEgg(this, this.birdeggtexture, 100, -100, -50); 
+
+    this.birdeggs = [];
+    this.birdeggs.push(this.birdegg1, this.birdegg2, this.birdegg3, this.birdegg4); 
+
+    this.birdnesttexture = new CGFtexture(this, "images/nest.jpg");
+    this.birdnest = new MyNest(this, this.birdnesttexture, -50, -100, -30); 
+
+    //Bird
+    this.bird = new MyBird(this, 1, this.birdeggs, this.birdnest);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -52,17 +67,6 @@ export class MyScene extends CGFscene {
     this.texture3 = new CGFtexture(this, "images/panorama4.jpg");
     this.panoram = new MyPanoram(this, this.texture3);
 
-    this.birdeggtexture = new CGFtexture(this, "images/egg.jpg"); 
-    this.birdegg1 = new MyBirdEgg(this, this.birdeggtexture);
-    this.birdegg2 = new MyBirdEgg(this, this.birdeggtexture); 
-    this.birdegg3 = new MyBirdEgg(this, this.birdeggtexture); 
-    this.birdegg4 = new MyBirdEgg(this, this.birdeggtexture); 
-
-    this.birdeggs = [];
-    this.birdeggs.push(this.birdegg1, this.birdegg2, this.birdegg3, this.birdegg4); 
-
-    this.birdnesttexture = new CGFtexture(this, "images/nest.jpg");
-    this.birdnest = new MyNest(this, this.birdnesttexture); 
     this.setUpdatePeriod(50);
 
   }
@@ -117,13 +121,8 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
     this.bird.display();
     this.popMatrix();
-    
-    this.birdeggs[0].display(25, -100, 25)
-    this.birdeggs[1].display(45, -100, 100); 
-    this.birdeggs[2].display(100, -100, 30); 
-    this.birdeggs[3].display(100, -100, -50); 
 
-    this.birdnest.display(-50, -100, -30); 
+    this.birdnest.display(); 
     
     // ---- END Primitive drawing section
   }
@@ -147,6 +146,10 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyD")) {
       text += " D ";
       keysPressed = true;
+    }
+    if (this.gui.isKeyPressed("KeyP")){
+      text += " P "; 
+      keysPressed = true; 
     }
     if (keysPressed)
       console.log(text);
