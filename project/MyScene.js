@@ -140,6 +140,8 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
+    this.panoram.updatePanoram(this.camera.position);
+
     if(this.displayPanorama)
       this.panoram.display();
     

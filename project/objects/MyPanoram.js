@@ -25,4 +25,7 @@ export class MyPanoram extends CGFobject {
         this.sphere.display();
         this.scene.popMatrix();
     }
+    updatePanoram(cameraPosition) {
+        this.sphere.updatePosition(cameraPosition);
+    }
 }

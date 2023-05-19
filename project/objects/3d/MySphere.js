@@ -7,6 +7,7 @@ export class MySphere extends CGFobject {
         this.latitude_divs = stacks;
         this.longitude_divs = slices;
         this.radius = radius;
+        this.cameraPosition = [0.0,0.0,0.0];
         this.initBuffers();
     }
 
@@ -27,10 +28,9 @@ export class MySphere extends CGFobject {
                 const long_ang = 2 * Math.PI * long / this.longitude_divs;
 
                 // vertices in esferic coordinates (radius, lat_ang, long_ang)
-                var x = this.radius * Math.sin(lat_ang) * Math.cos(+long_ang);
-                var y = this.radius * Math.cos(lat_ang);
-                var z = this.radius * Math.sin(lat_ang) * Math.sin(-long_ang);
-                //this.vertices.push(x, y, z);
+                var x = this.radius * Math.sin(lat_ang) * Math.cos(+long_ang) + this.cameraPosition[0];
+                var y = this.radius * Math.cos(lat_ang) + this.cameraPosition[1];
+                var z = this.radius * Math.sin(lat_ang) * Math.sin(-long_ang) + this.cameraPosition[2];
                 this.vertices.push(x, y, z);
 
                 // normals
@@ -60,9 +60,9 @@ export class MySphere extends CGFobject {
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
-        
-        // For debugging only
-        // console.log(this.vertices);
-        // console.log(this.texCoords);
+    }
+    updatePosition(cameraPosition) {
+        this.cameraPosition = cameraPosition;
+        this.initBuffers();
     }
 }
