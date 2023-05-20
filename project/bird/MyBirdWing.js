@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
 
 export class MyBirdWing extends CGFobject{
     constructor(scene,  scale) {
@@ -8,8 +8,14 @@ export class MyBirdWing extends CGFobject{
         this.wingA = new MyBirdWingA(scene, 1);
         this.wingB = new MyBirdWingB(scene, 1);
 
+        this.appearance = new CGFappearance(this.scene);
+        this.texture = new CGFtexture(this.scene, '../images/bird_feathers.jpg');
+        this.appearance.setTexture(this.texture);
+        this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
         this.animWingA = 0;
         this.animWingB = 0;
+        this.initBuffers();
     }
 
     update(t, speed, speedFactor){
@@ -29,11 +35,13 @@ export class MyBirdWing extends CGFobject{
         // this.wingB.enableNormalViz();
 
         this.scene.pushMatrix();
+        this.appearance.apply();
         this.scene.rotate(this.animWingA, 0, 0, 1);
         this.wingA.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.appearance.apply();
         this.scene.rotate(this.animWingA, 0, 0, 1);
         this.scene.translate(1, 0, 0);
         this.scene.rotate(this.animWingB, 0, 0, 1);
@@ -73,6 +81,14 @@ export class MyBirdWingA extends CGFobject{
             0,1,0,
             0,1,0,
         ];
+
+        this.texCoords = [
+            0, 0,
+            0, 1,
+            1, 0,
+            1, 1,
+        ];
+
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
@@ -103,6 +119,14 @@ export class MyBirdWingB extends CGFobject{
             0,1,0,
             0,1,0,
         ];
+
+        this.texCoords = [
+            0, 0,
+            0, 1,
+            1, 0,
+            1, 1,
+        ];
+
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }

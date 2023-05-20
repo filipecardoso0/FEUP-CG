@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject, CGFappearance, CGFtexture } from '../../lib/CGF.js';
 import { MyBirdBody } from './MyBirdBody.js';
 import { MyBirdHead } from './MyBirdHead.js';
 import { MyBirdTail } from './MyBirdTail.js';
@@ -16,11 +16,27 @@ export class MyBird extends CGFobject {
         this.wings = new MyBirdWings(scene, 1);
 
         //Initialize  Materials
-        this.appearance = new CGFappearance(this.scene);
-        this.appearance.setAmbient(0.5, 0.5, 0.5, 1);
-        this.appearance.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.appearance.setSpecular(0.1, 0.1, 0.1, 1);
-        this.appearance.setShininess(10.0);
+        this.wingsAppearance = new CGFappearance(this.scene);
+        this.wingsAppearance.setAmbient(0.2, 0.2, 0.2, 1);
+        this.wingsAppearance.setDiffuse(0, 0.1, 0.2, 1);
+        this.wingsAppearance.setSpecular(0, 0.1, 0.2, 1);
+        this.wingsAppearance.setShininess(10.0);
+        this.wingsTexture = new CGFtexture(this.scene, '../images/bird_feathers.jpg');
+        this.wingsAppearance.setTexture(this.wingsTexture);
+        this.wingsAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.bodyAppearance = new CGFappearance(this.scene);
+        this.bodyAppearance.setAmbient(0.2, 0.2, 0.2, 1);
+        this.bodyAppearance.setDiffuse(0, 0.3, 0.4, 1);
+        this.bodyAppearance.setSpecular(0, 0.3, 0.4, 1);
+        this.bodyAppearance.setShininess(10.0);
+
+        this.tailAppearance = new CGFappearance(this.scene);
+        this.tailAppearance.setAmbient(0.2, 0.2, 0.2, 1);
+        this.tailAppearance.setDiffuse(0.5, 0.5, 0.5, 1);
+        this.tailAppearance.setSpecular(0.5, 0.5, 0.5, 1);
+        this.tailAppearance.setShininess(10.0);
+
 
         this.maxSpeed = 2 ;
         this.angle = 0;
@@ -82,7 +98,6 @@ export class MyBird extends CGFobject {
     }
 
     display() {
-        this.appearance.apply();
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.angle, 0, 1, 0);
@@ -90,9 +105,12 @@ export class MyBird extends CGFobject {
         this.scene.translate(this.x, this.y, this.z);
         this.scene.translate(0, this.y, 0);
         //this.scene.scale(1,1,-1);
+        this.bodyAppearance.apply();
         this.body.display();
         this.head.display();
+        this.wingsAppearance.apply();
         this.tail.display();
+        this.wingsAppearance.apply();
         this.wings.display();
         this.scene.popMatrix();
     }

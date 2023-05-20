@@ -103,6 +103,7 @@ export class MyScene extends CGFscene {
     this.panoram.display();
 
     this.pushMatrix();
+    this.setActiveShader(this.defaultShader);
     this.bird.display();
     this.popMatrix();
     
