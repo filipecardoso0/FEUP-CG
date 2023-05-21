@@ -85,6 +85,8 @@ We then created a terrain, using a shader. The terrain is composed of a plane, w
 
 # TODO
 
+![Bird Eggs](screenshots/project-t05g05-4.png)
+
 <br>
 
 ### **6. Integration of Trees**
