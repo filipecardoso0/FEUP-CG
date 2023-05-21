@@ -32,22 +32,22 @@ export class MyNest extends CGFobject {
         for(let i=0; i<this.birdeggs.length; i++){
             if (i == 0){
                 this.birdeggs[i].x = this.x - 2; 
-                this.birdeggs[i].y = this.y;
+                this.birdeggs[i].y = this.y+1;
                 this.birdeggs[i].z = this.z + 2; 
             }
             else if (i == 1){
                 this.birdeggs[i].x = this.x + 2;
-                this.birdeggs[i].y = this.y;
+                this.birdeggs[i].y = this.y+1;
                 this.birdeggs[i].z = this.z - 4; 
             }
             else if (i == 2){
                 this.birdeggs[i].x = this.x - 2;
-                this.birdeggs[i].y = this.y;
+                this.birdeggs[i].y = this.y+1;
                 this.birdeggs[i].z = this.z - 3;  
             }
             else{
                 this.birdeggs[i].x = this.x + 3; 
-                this.birdeggs[i].y = this.y;
+                this.birdeggs[i].y = this.y+1;
                 this.birdeggs[i].z = this.z + 2; 
             }
         }
