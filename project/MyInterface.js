@@ -22,8 +22,6 @@ export class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'fovFactor', 0.5, 2).name("FOV");
 
-        this.gui.add(this.scene, 'treeSpacing', 5, 30).name("Tree Spacing");
-
         this.gui.add(this.scene, 'windAngle', 0, 2*Math.PI).name("Wind Angle");
         this.gui.add(this.scene, 'windStrength', 0, 0.5).name("Wind Strength");
         this.gui.add(this.scene, 'isWind').name("Wind");

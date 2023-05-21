@@ -239,7 +239,7 @@ export class MyBird extends CGFobject {
         }
     }
     reset(){
-        this.x = 0;
+        this.x = 66;
         this.y = this.fixedY;
         this.z = 0;
         this.angle = 0;

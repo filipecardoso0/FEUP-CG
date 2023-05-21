@@ -61,9 +61,6 @@ export class MyScene extends CGFscene {
     this.windStrength = 0.01;
     this.isWind = true;
 
-    // This is the expected use of the wind vector ***
-    // this.windVector = [Math.cos(this.windAngle), 0, Math.sin(this.windAngle)];
-
     this.treeSpacing = 15;
 
     this.treeGroupPatch = new MyTreeFullPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind], this.texture2);

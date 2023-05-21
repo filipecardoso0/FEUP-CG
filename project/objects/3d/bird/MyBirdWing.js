@@ -26,9 +26,6 @@ export class MyBirdWing extends CGFobject{
     }
 
     display() {
-        this.wingA.enableNormalViz();
-        this.wingB.enableNormalViz();
-
         this.scene.pushMatrix();
         this.scene.rotate(this.animWingA, 0, 0, 1);
         this.wingA.display();
