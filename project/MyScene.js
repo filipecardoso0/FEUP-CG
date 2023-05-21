@@ -145,11 +145,6 @@ export class MyScene extends CGFscene {
     if(this.displayPanorama)
       this.panoram.display();
     
-    this.terrain.display();
-
-    this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
-    //this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
-
     this.setActiveShader(this.defaultShader);
 
     // ---- END Primitive drawing section

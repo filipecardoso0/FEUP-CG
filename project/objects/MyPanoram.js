@@ -13,7 +13,7 @@ export class MyPanoram extends CGFobject {
         this.appearance.setTexture(this.texture);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.sphere = new MySphere(this.scene, 24 , 24, 300);
+        this.sphere = new MySphere(this.scene, 24 , 24, 200);
     }
     update(ambientR, ambientG, ambientB) {
         this.appearance.setDiffuse(ambientR, ambientG, ambientB, 1.0);
