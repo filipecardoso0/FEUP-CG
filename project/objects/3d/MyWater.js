@@ -26,7 +26,7 @@ export class MyWater extends CGFobject {
         this.textureHeigthMap.bind(2);
 
         this.appearance.apply();
-        this.scene.translate(0,-75,0);
+        this.scene.translate(0,-78,0);
         this.scene.scale(400,100,400);
         this.scene.rotate(-Math.PI/2.0,1,0,0);
         this.plane.display();

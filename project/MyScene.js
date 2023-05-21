@@ -48,6 +48,7 @@ export class MyScene extends CGFscene {
 
     this.texturePanorama = new CGFtexture(this, "images/panorama4.jpg");
     this.panoram = new MyPanoram(this, this.texturePanorama);
+    this.fixedPanorama = false;
 
     this.textureBillboard1 = new CGFtexture(this, "images/billboardtree.png");
     this.textureBillboard2 = new CGFtexture(this, "images/billboardtree2.png");
@@ -73,9 +74,10 @@ export class MyScene extends CGFscene {
     this.groupPosZ = -46;
 
     this.cameraYOffset = 5.0;
+    this.birdDistance = 10.0;
 
     this.followBirdKey = false;
-    this.followBirdB = false;
+    this.followBirdB = true;
 
     this.waterTex = new CGFtexture(this, "images/waterTex.jpg");
     this.waterMap = new CGFtexture(this, "images/waterMap.jpg");
@@ -83,7 +85,7 @@ export class MyScene extends CGFscene {
 
     // set the scene update period 
 		// (to invoke the update() method every 50ms or as close as possible to that )
-		this.setUpdatePeriod(50);
+		this.setUpdatePeriod(33);
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -156,24 +158,20 @@ export class MyScene extends CGFscene {
 
     }
 
-    if (this.gui.isKeyPressed("KeyW")) {
-      text += " W ";
-      keysPressed = true;
+    if (this.gui.isKeyPressed("KeyV")) {
+      this.birdDistance += 1.0;
+      if (this.birdDistance > 25.0) {
+        this.birdDistance = 25.0;
+      }
     }
-    if (this.gui.isKeyPressed("KeyS")) {
-      text += " S ";
-      keysPressed = true;
+
+    if (this.gui.isKeyPressed("KeyB")) {
+      this.birdDistance -= 1.0;
+      if (this.birdDistance < 5.0) {
+        this.birdDistance = 5.0;
+      }
+
     }
-    if (this.gui.isKeyPressed("KeyA")) {
-      text += " A ";
-      keysPressed = true;
-    }
-    if (this.gui.isKeyPressed("KeyD")) {
-      text += " D ";
-      keysPressed = true;
-    }
-    if (keysPressed)
-      console.log(text);
 
     if (this.gui.isKeyPressed("KeyR")) {
       this.bird.reset();
@@ -197,9 +195,9 @@ export class MyScene extends CGFscene {
     let y = this.bird.fixedY;
     let z = this.bird.z;
 
-    let x1 = x + Math.cos(angle - Math.PI/2)*10;
+    let x1 = x + Math.cos(angle - Math.PI/2)*this.birdDistance;
     let y1 = y + this.cameraYOffset;
-    let z1 = z - Math.sin(angle - Math.PI/2)*10;
+    let z1 = z - Math.sin(angle - Math.PI/2)*this.birdDistance;
 
     this.camera.setPosition(vec3.fromValues(x1, y1, z1));
     this.camera.setTarget(vec3.fromValues(x, y, z));
@@ -222,7 +220,10 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.panoram.updatePanoram(this.camera.position);
+    if(!this.fixedPanorama)
+      this.panoram.updatePanoram(this.camera.position);
+    else
+      this.panoram.updatePanoram(vec3.fromValues(0, 0, 0));
 
 
     if(this.followBirdB)

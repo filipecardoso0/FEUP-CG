@@ -35,6 +35,8 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
+        this.gui.add(this.scene, 'fixedPanorama').name("Fixed panorama");
+
 
         this.initKeys();
 
