@@ -49,7 +49,7 @@ export class MyBird extends CGFobject {
         this.z = 0;
 
         this.nestTexture = nestTexture;
-        this.nest = new MyNest(this.scene, this.nestTexture, 100, -50.2, 0, 8);
+        this.nest = new MyNest(this.scene, this.nestTexture, 100, -50.2, 0, 12);
 
 
         this.birdEggTexture = birdEggTexture; 
