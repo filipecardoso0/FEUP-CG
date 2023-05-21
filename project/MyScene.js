@@ -115,19 +115,6 @@ export class MyScene extends CGFscene {
     let ambientG = 1.0;
     let ambientB = 1.0;
 
-    let equation = 0.8*Math.sin(t/5000) + 1.0;
-
-    if(equation > 1.0) {
-        equation = 1.0;
-    } else if (equation < 0.55) {
-        equation = 0.55;
-    } 
-
-    // TODO add some logic to change the ambient light, for now this may suffice
-    ambientR = equation;
-    ambientG = equation;
-    ambientB = equation;
-
     this.panoram.update(ambientR, ambientG, ambientB);
     this.terrain.update(ambientR);
     this.treeGroupPatch.update(t, ambientR, ambientG, ambientB);
