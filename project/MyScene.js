@@ -31,7 +31,11 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
 
-    this.bird = new MyBird(this, 1);
+    this.nestTexture = new CGFtexture(this, 'images/nest.jpg');
+    this.birdEggTexture = new CGFtexture(this, 'images/egg.jpg'); 
+    this.birdFeathersTexture = new CGFtexture(this, 'images/bird_feathers.jpg');
+
+    this.bird = new MyBird(this, 1, this.nestTexture, this.birdEggTexture, this.birdFeathersTexture);
     this.speedFactor = 1;
     this.scaleFactor = 1;
 
