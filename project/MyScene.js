@@ -59,16 +59,16 @@ export class MyScene extends CGFscene {
     // This is the expected use of the wind vector ***
     // this.windVector = [Math.cos(this.windAngle), 0, Math.sin(this.windAngle)];
 
-    let treeGroupPatchCoordinates = [0,-87.5, 0];
+    let treeGroupPatchCoordinates = [99,-87.5, 0];
     let treeRowPatchCoordinates = [60,-87.5, 0];
     this.treeSpacing = 20;
 
     this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind], this.texture2);
     this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind], this.texture2);
 
-    this.rowPosX = 86;
+    this.rowPosX = 61;
     this.rowPosZ = -37;
-    this.groupPosX = -76;
+    this.groupPosX = 100;
     this.groupPosZ = -46;
 
     // set the scene update period 
