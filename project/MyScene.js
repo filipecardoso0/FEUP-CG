@@ -3,6 +3,7 @@ import { MyTerrain } from "./objects/3d/MyTerrain.js";
 import { MyPanoram } from "./objects/MyPanoram.js";
 import { MyTreeGroupPatch } from "./objects/MyTreeGroupPatch.js";
 import { MyTreeRowPatch } from "./objects/MyTreeRowPatch.js";
+import { MyBird } from "./objects/3d/MyBird.js";
 
 /**
  * MyScene
@@ -29,6 +30,10 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     //Initialize scene objects
+
+    this.bird = new MyBird(this, 1);
+    this.speedFactor = 1;
+    this.scaleFactor = 1;
 
     //Objects connected to MyInterface
     this.displayPanorama = true;
@@ -77,20 +82,21 @@ export class MyScene extends CGFscene {
     this.lights[0].update();
   }
   initCameras() {
-    /*this.camera = new CGFcamera(
-      1.0,
-      0.1,
-      1000,
-      vec3.fromValues(50, 10, 15),
-      vec3.fromValues(0, 0, 0)
-    ); */
-
+    /*
     this.camera = new CGFcamera(
       1.0,
       0.1,
       1000,
       vec3.fromValues(0, -26, 90),
       vec3.fromValues(0, -86, 30)
+    ); */
+
+    this.camera = new CGFcamera(
+      1.0,
+      0.1,
+      1000,
+      vec3.fromValues(5, 3, 3),
+      vec3.fromValues(0, 0, 0)
     );
 
   }
@@ -123,7 +129,34 @@ export class MyScene extends CGFscene {
     this.terrain.update(ambientR);
     this.treeGroupPatch.update(t, ambientR, ambientG, ambientB);
     this.treeRowPatch.update(t, ambientR, ambientG, ambientB);
+
+    this.checkKeys();
+    this.bird.update(t, this.speedFactor);
   }
+  checkKeys() {
+    var text = "Keys pressed: ";
+    var keysPressed = false;
+    // Check for key codes e.g. in https://keycode.info/
+
+    if (this.gui.isKeyPressed("KeyW")) {
+      text += " W ";
+      keysPressed = true;
+    }
+    if (this.gui.isKeyPressed("KeyS")) {
+      text += " S ";
+      keysPressed = true;
+    }
+    if (this.gui.isKeyPressed("KeyA")) {
+      text += " A ";
+      keysPressed = true;
+    }
+    if (this.gui.isKeyPressed("KeyD")) {
+      text += " D ";
+      keysPressed = true;
+    }
+    if (keysPressed)
+      console.log(text);
+  } 
   display() {
     this.camera.fov = this.fovFactor;
     // ---- BEGIN Background, camera and axis setup
@@ -144,6 +177,10 @@ export class MyScene extends CGFscene {
 
     if(this.displayPanorama)
       this.panoram.display();
+
+
+    this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+    this.bird.display();
     
     this.setActiveShader(this.defaultShader);
 
