@@ -1,13 +1,6 @@
 # Computer Graphics (L.EIC)
 ## Project 2022/2023
 
-# TODO LIST
-
-- [ ] Add size randomness to trees (Optional) need to fix treePlane, ez fix
-- [ ] Fix bird animation, texture and shader
-- [X] Add water shader (Optional)
-- [X] Add follow bird camera
-
 ## Objectives
 
 The aim of this project is to create a scene that combines the different elements explored in previous
