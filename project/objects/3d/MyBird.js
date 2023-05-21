@@ -67,16 +67,24 @@ export class MyBird extends CGFobject {
 
 
         //Bird Dive Variables
-        this.state = null; 
-        this.sequencestart = 0
-        this.delay = 2
-        this.groundlimit = 96; 
+        this.state = "glide"; 
+        this.sequencestart = 0.0;
+        this.delay = 2;
+        this.groundlimit = -50.2; 
         this.boundlimit = 115; 
 
         //BirdFeet Offset
-        this.birdfeetxoffset = -0; 
-        this.birdfeetyoffset = -15; 
+        this.birdfeetxoffset = 0; 
+        this.birdfeetyoffset = -8; 
         this.birdfeetzoffset = 0; 
+
+        this.disableDive = false;
+        this.ySpeed = 0.0;
+        this.ySpeedVal = (this.fixedY + 50.2 - 8);
+        this.tolerance = 5.0; 
+        this.transportEgg = null; 
+        this.dropStart = 0.0;
+        this.disableDrop = false;
         
     }
 
@@ -108,42 +116,127 @@ export class MyBird extends CGFobject {
         if (this.scene.gui.isKeyPressed("KeyR")){
             this.reset();
         }
-        if (this.scene.gui.isKeyPressed("KeyP")){ 
-            this.state = "dive"; 
-            this.sequencestart = Math.floor(t/1000); 
-        }
         if (this.scene.gui.isKeyPressed("KeyO")){
-            if(this.transportegg != null){
-                this.state = "drop";
+            if(this.transportEgg != null){
+                if(this.checkNearNest()) {
+                    this.state = "drop";
+                    this.dropStart = t/1000.0;
+                }
             }
         }
 
+        if (this.scene.gui.isKeyPressed("KeyP")){ 
+            if(!this.disableDive){  
+                this.state = "dive"; 
+                this.sequencestart = t/1000.0; 
+                this.disableDive = true;
+            }
+        }
+
+        
+        this.dealWithFlyAndDive(t);
+
+        this.displayEggDropping(t); 
+    }
+
+    dealWithFlyAndDive(t){
         if (this.state === "dive"){
-            this.dive(); 
-            const currtime = Math.floor(Date.now()/1000)
+            const currtime = t/1000.0 - this.sequencestart;
+            this.ySpeed = this.ySpeedVal;
 
-            if(currtime-this.sequencestart <= this.delay/2){
-                this.state = "dive"
-            }
-            else{
+            this.dive(currtime); 
+
+            if(currtime > this.delay/2){
                 this.state = "fly"
             }
+
+        } else if (this.state === "fly"){
+            const currtime = t/1000.0 - this.sequencestart;
+            this.ySpeed = this.ySpeedVal;
+
+            this.fly(currtime); 
+
+            if(currtime > this.delay){
+                this.state = 'glide'; 
+            }
+
+        } else if(this.state == 'glide') {
+            this.ySpeed = 0.0;
+            this.sequencestart = 0; 
+            this.disableDive = false;
         }
+    }
+    
 
-        if (this.state === "fly"){
-            this.fly(); 
-            const currtime = Math.floor(Date.now()/1000)
-
-            if(currtime-this.sequencestart <= this.delay){
-                this.state = "fly"
-            }
-            else{
-                this.state = null; 
-                this.sequencestart = 0; 
+    dive(t){
+        this.y -= this.ySpeed*t;
+        
+        for(let i=0; i<this.numberEggs; i++){
+            if(this.checkNearEgg(this.eggs[i]) && this.transportEgg === null){
+                this.transportEgg = this.eggs[i];  
+                this.eggs.splice(i, 1);
+                this.numberEggs--;
+                break;  
             }
         }
     }
 
+    fly(t){
+        this.y += this.ySpeed*(t-2.0); 
+    }
+    checkNearEgg(Egg){
+        //console.log(Egg.x, Egg.y, Egg.z, this.x -this.tolerance - Egg.x, this.x + this.tolerance + Egg.x, this.y -this.tolerance, this.y + this.tolerance, this.z -this.tolerance, this.z + this.tolerance);
+        if((Egg.x >= this.x -this.tolerance && Egg.x <= this.x + this.tolerance) && (Egg.y >= this.y -this.tolerance - 8.0 && Egg.y <= this.y + this.tolerance + 8.0) && (Egg.z >= this.z -this.tolerance && Egg.z <= this.z + this.tolerance)){
+            return true; 
+        }
+        else 
+            return false; 
+    }
+
+    checkNearNest(){
+        if((this.transportEgg.x >= this.nest.x - this.nest.radius && this.transportEgg.x <= this.nest.x + this.nest.radius) && (this.transportEgg.z >= this.nest.z - this.nest.radius && this.transportEgg.z <= this.nest.z + this.nest.radius)){
+            return true; 
+        }
+        else 
+            return false; 
+    }
+
+    checkNestColision(){
+        if((this.transportEgg.y >= this.nest.y - this.nest.radius && this.transportEgg.y <= this.nest.y + this.nest.radius) && this.state === "drop"){
+            return true; 
+        }
+
+        return false; 
+    }
+
+    displayBirdFeetEgg(){
+        if((this.transportEgg != null && this.state != "drop")){
+            this.transportEgg.setX(this.x + this.birdfeetxoffset); 
+            this.transportEgg.setY(this.y + this.birdfeetyoffset); 
+            this.transportEgg.setZ(this.z + this.birdfeetzoffset); 
+            this.transportEgg.display(); 
+        }
+    }
+
+    displayEggDropping(t){
+        if (this.state === "drop"){
+            console.log(this.transportEgg.x, this.transportEgg.y, this.transportEgg.z, this.z, this.groundlimit);
+            if (this.checkNearNest() && !this.checkNestColision()){
+                this.transportEgg.setY(this.transportEgg.y- (t/1000.0 - this.dropStart));
+                this.transportEgg.display(); 
+            }
+            if(this.checkNestColision()){
+                this.state = 'glide'; 
+                this.nest.birdeggs.push(this.transportEgg); 
+                this.transportEgg = null; 
+            }
+            else if (this.transportEgg.y < this.groundlimit){
+                this.state = 'glide'; 
+                this.eggs.push(this.transportEgg);
+                this.transportEgg = null; 
+            }
+        }
+    }
     turn(v){
         this.angle += v;
     }
@@ -169,89 +262,11 @@ export class MyBird extends CGFobject {
         }
     }
 
-    boundCheck(){
-        if(this.y >= -this.groundlimit && (this.z >= -this.boundlimit && this.z <= this.boundlimit) && (this.x <= this.boundlimit && this.x >= -this.boundlimit))
-            return true; 
-        else 
-            return false; 
-    }
-
-    checkNearEgg(Egg){
-        if((Egg.x >= this.x -this.tolerance && Egg.x <= this.x + this.tolerance) && (Egg.y >= this.y -this.tolerance && Egg.y <= this.y + this.tolerance) && (Egg.z >= this.z -this.tolerance && Egg.z <= this.z + this.tolerance) && this.state === "dive"){
-            return true; 
-        }
-        else 
-            return false; 
-    }
-
-    checkNearNest(){
-        if((this.transportegg.x >= this.birdnest.x - this.birdnest.radius && this.transportegg.x <= this.birdnest.x + this.birdnest.radius) && (this.transportegg.z >= this.birdnest.z - this.birdnest.radius && this.transportegg.z <= this.birdnest.z + this.birdnest.radius) && this.state === "drop"){
-            return true; 
-        }
-        else 
-            return false; 
-    }
-
-    checkNestColision(){
-        if((this.transportegg.y >= this.birdnest.y - this.birdnest.radius && this.transportegg.y <= this.birdnest.y + this.birdnest.radius) && this.state === "drop"){
-            return true; 
-        }
-
-        return false; 
-    }
-
-    dive(){
-        if(this.boundCheck()){
-            this.y -= 2.65;
-        }
-
-        for(let i=0; i<this.eggSize; i++){
-            if(this.checkNearEgg(this.eggs[i]) && this.transportegg === null){
-                this.transportegg = this.eggs[i];  
-                this.eggs.splice(i, 1);    
-                console.log(this.transportegg);        
-            }
-        }
-    }
-
-    fly(){
-        this.y += 2.65; 
-    }
-
-    displayBirdFeetEgg(){
-        if((this.transportegg != null && this.state != "drop") || (this.state === "drop" && !this.checkNearNest())){
-            console.log("Nas patas"); 
-            this.transportegg.setX(this.x + this.birdfeetxoffset); 
-            this.transportegg.setY(this.y + this.birdfeetyoffset); 
-            this.transportegg.setZ(this.z + this.birdfeetzoffset); 
-            this.transportegg.display(); 
-        }
-    }
-
-    displayEggDropping(){
-        if (this.state === "drop"){
-            if (this.checkNearNest() && !this.checkNestColision()){
-                console.log("Esta perto do ninho")
-                this.transportegg.setY(this.transportegg.y-1)
-                this.transportegg.display(); 
-            }
-
-            if(this.checkNestColision()){
-                this.state = null; 
-                this.birdnest.birdeggs.push(this.transportegg); 
-                this.transportegg = null; 
-            }
-        }
-    }
-
     display() {
         //Display Bird Eggs
         this.displayEggs();
         //Display Egg on The bird feet (if any)
-        this.displayBirdFeetEgg();
-        
-        //Display Egg dropping while in the air 
-        this.displayEggDropping(); 
+        this.displayBirdFeetEgg();        
 
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);

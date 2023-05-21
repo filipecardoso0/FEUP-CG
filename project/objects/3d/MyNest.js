@@ -31,20 +31,24 @@ export class MyNest extends CGFobject {
     updatePredefinedNestPositions(){
         for(let i=0; i<this.birdeggs.length; i++){
             if (i == 0){
-                this.birdeggs[i].x = -47; 
-                this.birdeggs[i].z = -35; 
+                this.birdeggs[i].x = this.x - 1; 
+                this.birdeggs[i].y = this.y;
+                this.birdeggs[i].z = this.z + 2; 
             }
             else if (i == 1){
-                this.birdeggs[i].x = -50;
-                this.birdeggs[i].z = -30; 
+                this.birdeggs[i].x = this.x - 2;
+                this.birdeggs[i].y = this.y;
+                this.birdeggs[i].z = this.z + 2; 
             }
             else if (i == 2){
-                this.birdeggs[i].x = -50; 
-                this.birdeggs[i].z = -25; 
+                this.birdeggs[i].x = this.x - 1;
+                this.birdeggs[i].y = this.y;
+                this.birdeggs[i].z = this.z;  
             }
             else{
-                this.birdeggs[i].x = -45; 
-                this.birdeggs[i].z = -25; 
+                this.birdeggs[i].x = this.x; 
+                this.birdeggs[i].y = this.y;
+                this.birdeggs[i].z = this.z; 
             }
         }
     }
