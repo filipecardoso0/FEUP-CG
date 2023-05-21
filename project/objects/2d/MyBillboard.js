@@ -2,11 +2,15 @@ import {CGFobject, CGFappearance, CGFshader} from '../../../lib/CGF.js';
 import {MyTreePlane} from './MyTreePlane.js'
 
 export class MyBillboard extends CGFobject {
-    constructor(scene, CGFtexture, wind, CGFHeightMapTexture) {
+    constructor(scene, CGFtexture, wind, CGFHeightMapTexture, heigthScale) {
         super(scene);
         this.texture = CGFtexture;
         this.wind = wind;
-        this.heigth = 25;
+        this.heigthScale = 1.0;
+
+        this.scale = [20.0*this.heigthScale, 25.0*this.heigthScale,25.0*this.heigthScale];
+
+        this.heigthAdjust = 12.5*this.heigthScale;
 
         this.appearance = new CGFappearance(this.scene);
         this.appearance.setTexture(this.texture);
@@ -32,11 +36,12 @@ export class MyBillboard extends CGFobject {
         else 
             angle = Math.acos(vec2.dot(vector1, vector2));
 
+            
         this.scene.translate(x,y,z);
-
-        this.scene.rotate(angle,0.0,1.0,0.0);     
-
-        this.scene.scale(20, this.heigth,25);
+        
+        this.scene.rotate(angle,0.0,1.0,0.0); 
+        
+        this.scene.scale(this.scale[0], this.scale[1], this.scale[2]);
 
         this.shader.setUniformsValues({ cameraAngle: angle });
 

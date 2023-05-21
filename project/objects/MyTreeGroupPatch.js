@@ -13,7 +13,7 @@ export class MyTreeGroupPatch extends CGFobject {
 
         this.billboards = [];
         for (let i = 0; i < 9; i++) {
-            this.billboards.push(new MyBillboard(this.scene, this.textures[Math.floor(Math.random()*3)], wind, CGFHeigthMapTexture));
+            this.billboards.push(new MyBillboard(this.scene, this.textures[Math.floor(Math.random()*3)], wind, CGFHeigthMapTexture, (Math.floor(Math.random()*3) + 9.0 )/10.0));
         }
         this.coordinatesOffset = [
             [Math.random()*this.spacing/3, 0, Math.random()*this.spacing/3],
@@ -64,5 +64,6 @@ export class MyTreeGroupPatch extends CGFobject {
         for (let i = 0; i < 9; i++) {
             this.billboards[i].display(this.coordinates[i][0], this.coordinates[i][1], this.coordinates[i][2], wind);
         }
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 }

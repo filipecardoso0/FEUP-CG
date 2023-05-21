@@ -1,6 +1,12 @@
 # Computer Graphics (L.EIC)
 ## Project 2022/2023
 
+# TODO LIST
+
+- [ ] Add size randomness to trees (Optional)
+- [ ] Fix bird animation, texture and shader
+- [ ] Add water shader (Optional)
+
 ## Objectives
 
 The aim of this project is to create a scene that combines the different elements explored in previous
@@ -33,25 +39,28 @@ It was applied a radius of 200 units to the sphere, which was the most desirable
 
 ![Panorama](screenshots/project-t05g05-1.png)
 
+<br>
 
 ### **3. Inclusion of a Bird**
 
 We then included a bird in the scene. We had to create a new shader for the bird, which was a simple shader that applied a texture to the bird, and also applied a specular light to it.
 
-#### **3.1.  Bird modeling**
+#### **3.1. Bird modeling**
 
 The bird was modeled manually, inside webgl. We used a simple bird model, with 5 main body parts: the head (with eyes and beak), the body, the tail, the left and the right wings. We also created a simple texture for the bird, which was applied to the bird in the shader.
 
-#### **3.2.  Bird animation**
+#### **3.2. Bird animation**
 
 The bird was animated using a simple animation, which has a simple movement of the bird's wings up and down. 
 
 
-#### **3.3.  Bird Control**
+#### **3.3. Bird Control**
 
 We also added the possibility to move forward/break, using the keys `W` and `S`, as well as turn sideways, with `A` and `D`. The speed of the animation is controlled by the `speedFactor` variable.
 
 ![Panorama](screenshots/project-t05g05-2.png)
+
+<br>
 
 ### **4. Terrain**
 
@@ -63,3 +72,46 @@ We then created a terrain, using a shader. The terrain is composed of a plane, w
 
 ![Panorama](screenshots/project-t05g05-3_b.png)
 
+### **5. Eggs and Nest**
+
+# TODO
+
+<br>
+
+### **6. Integration of Trees**
+
+In order to enrich the environment, we added a forest of trees, using billboards.
+
+, and a specular light, which is applied to the texture. The trees are then scattered across the terrain, using a random function, which places the trees in random positions, with random rotations and scales.
+
+#### **6.1. Billboard creation**
+
+The trees are created using a billboard shader, which is applied to a simple quad. The shader is composed of a texture, which is applied to the quad. The texture is a simple image of a tree, with a transparent background.
+
+They also have to be always facing the camera, on the XZ axis, so that they can be seen from any angle. This is done by calculating the angle between the camera and the tree, and then rotating the tree by that angle. 
+
+We applied 3 different textures to the trees:
+- Tree 1: Is the tree texture given in the root of the repository;
+- Tree 2: Is the same texture as Tree 1, but with a different color adjustment;
+- Tree 3: This tree textures was taken from [Victor Andrade Pinterest's page](https://br.pinterest.com/pin/489625790735154099/)
+
+#### **6.2. Grove of trees**
+
+The trees are either packer on a group of 9 trees (plot of 3x3), or on a row of 6 trees. The grooves are placed in a selected position, and their position, between themselfs, is random, so that they don't appear fully aligned at any instance. This is generated at run time, so that the trees are not always in the same position.
+
+Also, the texture taken by the tree is also random, so that the trees are not always the same.
+
+This is an example of the generation of a group of trees:
+
+![Group](screenshots/project-t05g05-5.png)
+
+This is an example of the generation of a row of trees:
+
+![Row](screenshots/project-t05g05-5_b.png)
+
+<br>
+
+### **7. Additional developments**
+
+From the possible aditional developments, we decided to implement the deformation of trees with the wind, based on the displacement of vertices of the respective
+quads.

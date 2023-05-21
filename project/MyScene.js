@@ -119,8 +119,8 @@ export class MyScene extends CGFscene {
 
     this.panoram.update(ambientR, ambientG, ambientB);
     this.terrain.update(ambientR);
-    //this.treeGroupPatch.update(t, ambientR, ambientG, ambientB);
-    //this.treeRowPatch.update(t, ambientR, ambientG, ambientB);
+    this.treeGroupPatch.update(t, ambientR, ambientG, ambientB);
+    this.treeRowPatch.update(t, ambientR, ambientG, ambientB);
 
     this.checkKeys();
     this.bird.update(t, this.speedFactor);
@@ -170,10 +170,10 @@ export class MyScene extends CGFscene {
     if(this.displayPanorama)
       this.panoram.display();
     
-    // this.terrain.display();
+    this.terrain.display();
 
     //this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
-    //this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
+    this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
 
     this.bird.display();
     
