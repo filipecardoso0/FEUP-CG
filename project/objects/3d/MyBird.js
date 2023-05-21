@@ -126,7 +126,7 @@ export class MyBird extends CGFobject {
         }
 
         if (this.scene.gui.isKeyPressed("KeyP")){ 
-            if(!this.disableDive){  
+            if(!this.disableDive && this.transportEgg == null){  
                 this.state = "dive"; 
                 this.sequencestart = t/1000.0; 
                 this.disableDive = true;
@@ -202,25 +202,15 @@ export class MyBird extends CGFobject {
     }
 
     checkNestColision(){
-        if((this.transportEgg.y >= this.nest.y - this.nest.radius && this.transportEgg.y <= this.nest.y + this.nest.radius) && this.state === "drop"){
+        if((this.transportEgg.y >= this.nest.y - this.nest.radius/2.0 && this.transportEgg.y <= this.nest.y + this.nest.radius/2.0) && this.state === "drop"){
             return true; 
         }
 
         return false; 
     }
 
-    displayBirdFeetEgg(){
-        if((this.transportEgg != null && this.state != "drop")){
-            this.transportEgg.setX(this.x + this.birdfeetxoffset); 
-            this.transportEgg.setY(this.y + this.birdfeetyoffset); 
-            this.transportEgg.setZ(this.z + this.birdfeetzoffset); 
-            this.transportEgg.display(); 
-        }
-    }
-
     displayEggDropping(t){
         if (this.state === "drop"){
-            console.log(this.transportEgg.x, this.transportEgg.y, this.transportEgg.z, this.z, this.groundlimit);
             if (this.checkNearNest() && !this.checkNestColision()){
                 this.transportEgg.setY(this.transportEgg.y- (t/1000.0 - this.dropStart));
                 this.transportEgg.display(); 
@@ -260,13 +250,19 @@ export class MyBird extends CGFobject {
         for (let i = 0; i < this.numberEggs; i++) {
             this.eggs[i].display();
         }
+        if((this.transportEgg != null && this.state != "drop")){
+            this.transportEgg.setX(this.x + this.birdfeetxoffset); 
+            this.transportEgg.setY(this.y + this.birdfeetyoffset); 
+            this.transportEgg.setZ(this.z + this.birdfeetzoffset); 
+        }
+        if(this.transportEgg != null){
+            this.transportEgg.display(); 
+        }
     }
 
     display() {
         //Display Bird Eggs
         this.displayEggs();
-        //Display Egg on The bird feet (if any)
-        this.displayBirdFeetEgg();        
 
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
