@@ -8,11 +8,6 @@ export class MyBirdWing extends CGFobject{
         this.wingA = new MyBirdWingA(scene, 1);
         this.wingB = new MyBirdWingB(scene, 1);
 
-        this.appearance = new CGFappearance(this.scene);
-        this.texture = new CGFtexture(this.scene, '../images/bird_feathers.jpg');
-        this.appearance.setTexture(this.texture);
-        this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
         this.animWingA = 0;
         this.animWingB = 0;
         this.initBuffers();
@@ -31,17 +26,15 @@ export class MyBirdWing extends CGFobject{
     }
 
     display() {
-        // this.wingA.enableNormalViz();
-        // this.wingB.enableNormalViz();
+        this.wingA.enableNormalViz();
+        this.wingB.enableNormalViz();
 
         this.scene.pushMatrix();
-        this.appearance.apply();
         this.scene.rotate(this.animWingA, 0, 0, 1);
         this.wingA.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.appearance.apply();
         this.scene.rotate(this.animWingA, 0, 0, 1);
         this.scene.translate(1, 0, 0);
         this.scene.rotate(this.animWingB, 0, 0, 1);
@@ -83,10 +76,10 @@ export class MyBirdWingA extends CGFobject{
         ];
 
         this.texCoords = [
-            0, 0,
-            0, 1,
-            1, 0,
-            1, 1,
+            0,0,
+            0,0.5,
+            0.5,0,
+            0.5,0.5,
         ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
@@ -121,10 +114,9 @@ export class MyBirdWingB extends CGFobject{
         ];
 
         this.texCoords = [
-            0, 0,
-            0, 1,
-            1, 0,
-            1, 1,
+            0.7,0.7,
+            0,0,
+            0,0.5,
         ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;

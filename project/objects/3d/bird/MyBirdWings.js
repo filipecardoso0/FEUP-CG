@@ -16,6 +16,7 @@ export class MyBirdWings extends CGFobject {
     }
 
     display() {
+
         //Wings
         this.scene.pushMatrix();
         this.scene.translate(0.8, 0.2, 0);

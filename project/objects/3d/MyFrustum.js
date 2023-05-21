@@ -24,6 +24,7 @@ export class MyFrustum extends CGFobject {
 		this.vertices = [];
 		this.indices = [];
 		this.normals = [];
+		this.texCoords = [];
 
 
 		// vertices
@@ -38,6 +39,7 @@ export class MyFrustum extends CGFobject {
                 var x = Math.cos(angle)*(1+diff_size*stack);
                 var y = Math.sin(angle)*(1+diff_size*stack);
 				this.vertices.push(x, y, stack_size*stack);
+				this.texCoords.push(slice/this.slices, stack/this.stacks);
 			}
 			angle += slice_angle;
 		}

@@ -19,26 +19,25 @@ export class MyBird extends CGFobject {
 
         //Initialize  Materials
         this.wingsAppearance = new CGFappearance(this.scene);
-        this.wingsAppearance.setAmbient(0.2, 0.2, 0.2, 1);
-        this.wingsAppearance.setDiffuse(0, 0.1, 0.2, 1);
-        this.wingsAppearance.setSpecular(0, 0.1, 0.2, 1);
+        this.wingsAppearance.setAmbient(1, 1, 1, 1);  
         this.wingsAppearance.setShininess(10.0);
         this.wingsTexture = birdFeathersTexture;
         this.wingsAppearance.setTexture(this.wingsTexture);
         this.wingsAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
         this.bodyAppearance = new CGFappearance(this.scene);
-        this.bodyAppearance.setAmbient(0.2, 0.2, 0.2, 1);
-        this.bodyAppearance.setDiffuse(0, 0.3, 0.4, 1);
-        this.bodyAppearance.setSpecular(0, 0.3, 0.4, 1);
         this.bodyAppearance.setShininess(10.0);
+        this.bodyAppearance.setAmbient(1, 1, 1, 1);
+        this.bodyTexture = birdFeathersTexture;
+        this.bodyAppearance.setTexture(this.bodyTexture);
+        this.bodyAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
         this.tailAppearance = new CGFappearance(this.scene);
-        this.tailAppearance.setAmbient(0.2, 0.2, 0.2, 1);
-        this.tailAppearance.setDiffuse(0.5, 0.5, 0.5, 1);
-        this.tailAppearance.setSpecular(0.5, 0.5, 0.5, 1);
         this.tailAppearance.setShininess(10.0);
-
+        this.tailAppearance.setAmbient(0.2, 0.2, 0.2, 1);
+        this.tailTexture = new CGFtexture(this.scene, '../../images/bird_feathers_diag.jpg');
+        this.tailAppearance.setTexture(this.bodyTexture);
+        this.tailAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
         this.maxSpeed = 2;
         this.angle = 0;
@@ -271,7 +270,7 @@ export class MyBird extends CGFobject {
         this.bodyAppearance.apply();
         this.body.display();
         this.head.display();
-        this.wingsAppearance.apply();
+        this.tailAppearance.apply();
         this.tail.display();
         this.wingsAppearance.apply();
         this.wings.display();
