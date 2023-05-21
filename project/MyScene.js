@@ -82,21 +82,13 @@ export class MyScene extends CGFscene {
     this.lights[0].update();
   }
   initCameras() {
-    /*
+    
     this.camera = new CGFcamera(
       1.0,
       0.1,
       1000,
-      vec3.fromValues(0, -26, 90),
-      vec3.fromValues(0, -86, 30)
-    ); */
-
-    this.camera = new CGFcamera(
-      1.0,
-      0.1,
-      1000,
-      vec3.fromValues(5, 3, 3),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(77, -16, 70),
+      vec3.fromValues(77, -46, 10)
     );
 
   }
@@ -127,8 +119,8 @@ export class MyScene extends CGFscene {
 
     this.panoram.update(ambientR, ambientG, ambientB);
     this.terrain.update(ambientR);
-    this.treeGroupPatch.update(t, ambientR, ambientG, ambientB);
-    this.treeRowPatch.update(t, ambientR, ambientG, ambientB);
+    //this.treeGroupPatch.update(t, ambientR, ambientG, ambientB);
+    //this.treeRowPatch.update(t, ambientR, ambientG, ambientB);
 
     this.checkKeys();
     this.bird.update(t, this.speedFactor);
@@ -177,9 +169,12 @@ export class MyScene extends CGFscene {
 
     if(this.displayPanorama)
       this.panoram.display();
+    
+    this.terrain.display();
 
+    //this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
+    //this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
 
-    this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
     this.bird.display();
     
     this.setActiveShader(this.defaultShader);

@@ -41,18 +41,19 @@ export class MyBird extends CGFobject {
         this.maxSpeed = 2 ;
         this.angle = 0;
         this.speed = 0;
-        this.x = 0;
-        this.y = 0;
+        this.x = 66;
+        this.y = -25;
+        this.fixedY = this.y;
         this.z = 0;
     }
 
     update(t, speedFactor){
         if (this.speed == 0){
-            this.y = 0.3 * Math.cos(t/1000 * (Math.PI * 2) * speedFactor);
+            this.y = 0.3 * Math.cos(t/1000 * (Math.PI * 2) * speedFactor) + this.fixedY;
         } else {
             var maxOscilation = 0.4;
             var oscilation = maxOscilation/this.speed/2 < -maxOscilation ? maxOscilation : maxOscilation/this.speed/2;
-            this.y = oscilation * Math.cos(t/1000 * (Math.PI * 2) * speedFactor);
+            this.y = oscilation * Math.cos(t/1000 * (Math.PI * 2) * speedFactor) + this.fixedY;
         }
         this.wings.update(t, this.speed, speedFactor);
 
@@ -91,20 +92,20 @@ export class MyBird extends CGFobject {
     }
     reset(){
         this.x = 0;
-        this.y = 0;
+        this.y = this.fixedY;
         this.z = 0;
         this.angle = 0;
         this.speed = 0;
     }
 
     display() {
+
+
+
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
+        this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
         this.scene.rotate(this.angle, 0, 1, 0);
-        this.scene.translate(-this.x, -this.y, -this.z);
-        this.scene.translate(this.x, this.y, this.z);
-        this.scene.translate(0, this.y, 0);
-        //this.scene.scale(1,1,-1);
         this.bodyAppearance.apply();
         this.body.display();
         this.head.display();

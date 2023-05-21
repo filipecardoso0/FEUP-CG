@@ -34,3 +34,32 @@ It was applied a radius of 200 units to the sphere, which was the most desirable
 ![Panorama](screenshots/project-t05g05-1.png)
 
 
+### **3. Inclusion of a Bird**
+
+We then included a bird in the scene. We had to create a new shader for the bird, which was a simple shader that applied a texture to the bird, and also applied a specular light to it.
+
+#### **3.1.  Bird modeling**
+
+The bird was modeled manually, inside webgl. We used a simple bird model, with 5 main body parts: the head (with eyes and beak), the body, the tail, the left and the right wings. We also created a simple texture for the bird, which was applied to the bird in the shader.
+
+#### **3.2.  Bird animation**
+
+The bird was animated using a simple animation, which has a simple movement of the bird's wings up and down. 
+
+
+#### **3.3.  Bird Control**
+
+We also added the possibility to move forward/break, using the keys `W` and `S`, as well as turn sideways, with `A` and `D`. The speed of the animation is controlled by the `speedFactor` variable.
+
+![Panorama](screenshots/project-t05g05-2.png)
+
+### **4. Terrain**
+
+We then created a terrain, using a shader. The terrain is composed of a plane, which is manipulated on the shader, using a heightmap. The heightmap is a texture that contains the height of each point of the grid, which is then used to create the distortion desired on the plane. The main texture of the terrain is mixed with the altimetry, whose value is obtained from the heightmap - this ranges from water, to grass, to rocks, as well as mountain peaks.
+
+(Keep in mind the bird is scalled, to be visible on the pictures)
+
+![Panorama](screenshots/project-t05g05-3.png)
+
+![Panorama](screenshots/project-t05g05-3_b.png)
+
