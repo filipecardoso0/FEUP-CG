@@ -71,9 +71,14 @@ export class MyScene extends CGFscene {
     this.groupPosX = 100;
     this.groupPosZ = -46;
 
+    this.cameraYOffset = 5.0;
+
+    this.followBirdKey = false;
+    this.followBirdB = false;
+
     // set the scene update period 
 		// (to invoke the update() method every 50ms or as close as possible to that )
-		this.setUpdatePeriod(16);
+		this.setUpdatePeriod(50);
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 0, 1);
@@ -130,6 +135,21 @@ export class MyScene extends CGFscene {
     var keysPressed = false;
     // Check for key codes e.g. in https://keycode.info/
 
+    if (this.gui.isKeyPressed("KeyT")) {
+      this.cameraYOffset += 1.0;
+      if (this.cameraYOffset > 15.0) {
+        this.cameraYOffset = 15.0;
+      }
+    }
+
+    if (this.gui.isKeyPressed("KeyG")) {
+      this.cameraYOffset -= 1.0;
+      if (this.cameraYOffset < -15.0) {
+        this.cameraYOffset = -15.0;
+      }
+
+    }
+
     if (this.gui.isKeyPressed("KeyW")) {
       text += " W ";
       keysPressed = true;
@@ -148,7 +168,38 @@ export class MyScene extends CGFscene {
     }
     if (keysPressed)
       console.log(text);
+
+    if (this.gui.isKeyPressed("KeyR")) {
+      this.bird.reset();
+    }
+
+    if (this.gui.isKeyPressed("KeyF")) {
+      if(!this.followBirdKey) {
+        this.followBirdB = !this.followBirdB;
+      }
+      this.followBirdKey = true;
+    } else {
+      this.followBirdKey = false;
+    }
+
   } 
+  followBird() {
+
+    let angle = this.bird.angle;
+
+    let x = this.bird.x;
+    let y = this.bird.fixedY;
+    let z = this.bird.z;
+
+    let x1 = x + Math.cos(angle - Math.PI/2)*10;
+    let y1 = y + this.cameraYOffset;
+    let z1 = z - Math.sin(angle - Math.PI/2)*10;
+
+    this.camera.setPosition(vec3.fromValues(x1, y1, z1));
+    this.camera.setTarget(vec3.fromValues(x, y, z));
+
+  }
+
   display() {
     this.camera.fov = this.fovFactor;
     // ---- BEGIN Background, camera and axis setup
@@ -167,6 +218,10 @@ export class MyScene extends CGFscene {
 
     this.panoram.updatePanoram(this.camera.position);
 
+
+    if(this.followBirdB)
+      this.followBird();
+
     if(this.displayPanorama)
       this.panoram.display();
     
@@ -181,28 +236,4 @@ export class MyScene extends CGFscene {
 
     // ---- END Primitive drawing section
   }
-
-  checkKeys() {
-    var text = "Keys pressed: ";
-    var keysPressed = false;
-    // Check for key codes e.g. in https://keycode.info/
-    if (this.gui.isKeyPressed("KeyW")) {
-      text += " W ";
-      keysPressed = true;
-    }
-    if (this.gui.isKeyPressed("KeyS")) {
-      text += " S ";
-      keysPressed = true;
-    }
-    if (this.gui.isKeyPressed("KeyA")) {
-      text += " A ";
-      keysPressed = true;
-    }
-    if (this.gui.isKeyPressed("KeyD")) {
-      text += " D ";
-      keysPressed = true;
-    }
-    if (keysPressed)
-      console.log(text);
-  } 
 }
