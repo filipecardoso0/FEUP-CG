@@ -83,9 +83,6 @@ We then created a terrain, using a shader. The terrain is composed of a plane, w
 
 ### **5. Eggs and Nest**
 
-# TODO
-
-
 Eggs were implemented using 1 half sphere. The top part was scaled so it would seem more less round than the bottom part, therefore forming a more realistic egg shape. 
 Nest was implemented by using a half sphere, however the half sphere had to be divided in two parts. The outside half sphere and the inside half sphere. By combining a default hide sphere with a modified half sphere just as the panoram sphere the egg texture would be visible on both outside and inside. 
 In addition, in order to implement the bird egg catch we added the fly and dive state (activated by pressing the Key "P"), which were responsible for monitoring the bird movement and handling it in a two second time span and making the movement liner on the XZ plane. 
