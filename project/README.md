@@ -6,6 +6,7 @@
 - [ ] Add size randomness to trees (Optional)
 - [ ] Fix bird animation, texture and shader
 - [ ] Add water shader (Optional)
+- [X] Add follow bird camera
 
 ## Objectives
 
