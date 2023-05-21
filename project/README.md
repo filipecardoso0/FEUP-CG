@@ -54,10 +54,18 @@ The bird was modeled manually, inside webgl. We used a simple bird model, with 5
 
 The bird was animated using a simple animation, which has a simple movement of the bird's wings up and down. 
 
-
 #### **3.3. Bird Control**
 
 We also added the possibility to move forward/break, using the keys `W` and `S`, as well as turn sideways, with `A` and `D`. The speed of the animation is controlled by the `speedFactor` variable.
+
+
+Also, further on development we added the possibility for the players to focus on the bird, by pressing the `F` key. This will make the camera follow the bird as a common third person view. We can also detach from the bird by pressing the key again. 
+
+There is also a possibility to change the focus distance, as well as the top-down view angle: 
+- `V` - Increases the distance to the bird
+- `B` - Decreases the distance to the bird
+- `T` - Increases the top-down view angle
+- `G` - Decreases the top-down view angle
 
 ![Panorama](screenshots/project-t05g05-2.png)
 
@@ -120,3 +128,9 @@ quads.
 To achieve this goal, we used a noise function, which is applied to the vertices of the trees, in the vertex shader. This function is applied to the vertices, based on the time, which is incremented at each frame. This creates a wave-like movement, which is applied to the trees, as if they were being moved by the wind.
 
 ![Wind](screenshots/project-t05g05-6.png)
+
+### **8. Complementary Development**
+
+We added a water texture to the scene, that covers all the lowerside of the terrain. This texture is applied to a plane, which is placed below the terrain, and is also animated, using a simple animation provinient from the TP5, which moves the texture in the X and Y axis, creating the illusion of movement. We also applied a wave and a tidal effect to it.
+
+![Wave](screenshots/project-t05g05-7.png)

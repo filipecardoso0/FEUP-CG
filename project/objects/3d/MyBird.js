@@ -75,7 +75,6 @@ export class MyBird extends CGFobject {
         if (this.scene.gui.isKeyPressed("KeyR")){
             this.reset();
         }
-        console.log(this.speed);
     }
 
     turn(v){

@@ -23,10 +23,6 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'fovFactor', 0.5, 2).name("FOV");
 
         this.gui.add(this.scene, 'treeSpacing', 5, 30).name("Tree Spacing");
-        this.gui.add(this.scene, 'rowPosX', -100, 100).name("TreeRow X");
-        this.gui.add(this.scene, 'rowPosZ', -100, 100).name("TreeRow Z");
-        this.gui.add(this.scene, 'groupPosX', -100, 100).name("TreeGroup X");
-        this.gui.add(this.scene, 'groupPosZ', -100, 100).name("TreeGroup Z");
 
         this.gui.add(this.scene, 'windAngle', 0, 2*Math.PI).name("Wind Angle");
         this.gui.add(this.scene, 'windStrength', 0, 0.5).name("Wind Strength");

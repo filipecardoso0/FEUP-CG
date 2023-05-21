@@ -1,8 +1,7 @@
 import { CGFscene, CGFcamera, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyTerrain } from "./objects/3d/MyTerrain.js";
 import { MyPanoram } from "./objects/MyPanoram.js";
-import { MyTreeGroupPatch } from "./objects/MyTreeGroupPatch.js";
-import { MyTreeRowPatch } from "./objects/MyTreeRowPatch.js";
+import { MyTreeFullPatch } from "./objects/MyTreeFullPatch.js";
 import { MyBird } from "./objects/3d/MyBird.js";
 import { MyWater } from "./objects/3d/MyWater.js";
 
@@ -61,16 +60,12 @@ export class MyScene extends CGFscene {
     // This is the expected use of the wind vector ***
     // this.windVector = [Math.cos(this.windAngle), 0, Math.sin(this.windAngle)];
 
-    let treeGroupPatchCoordinates = [99,-87.5, 0];
-    let treeRowPatchCoordinates = [60,-87.5, 0];
-    this.treeSpacing = 20;
+    this.treeSpacing = 15;
 
-    this.treeGroupPatch = new MyTreeGroupPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeGroupPatchCoordinates, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind], this.texture2);
-    this.treeRowPatch = new MyTreeRowPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, treeRowPatchCoordinates, "z", this.treeSpacing, [this.windAngle, this.windStrength, this.isWind], this.texture2);
+    this.treeGroupPatch = new MyTreeFullPatch(this, this.textureBillboard1, this.textureBillboard2, this.textureBillboard3, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind], this.texture2);
 
-    this.rowPosX = 61;
-    this.rowPosZ = -37;
     this.groupPosX = 100;
+    this.groupPosY = 100;
     this.groupPosZ = -46;
 
     this.cameraYOffset = 5.0;
@@ -132,7 +127,6 @@ export class MyScene extends CGFscene {
     this.panoram.update(ambientR, ambientG, ambientB);
     this.terrain.update(ambientR);
     this.treeGroupPatch.update(t, ambientR, ambientG, ambientB);
-    this.treeRowPatch.update(t, ambientR, ambientG, ambientB);
 
     this.checkKeys();
     this.bird.update(t, this.speedFactor);
@@ -236,8 +230,7 @@ export class MyScene extends CGFscene {
 
     this.water.display();
 
-    this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
-    this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
+    this.treeGroupPatch.display([this.windAngle, this.windStrength, this.isWind]);
 
     this.bird.display();
     
