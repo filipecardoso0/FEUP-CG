@@ -83,10 +83,15 @@ We then created a terrain, using a shader. The terrain is composed of a plane, w
 
 ### **5. Eggs and Nest**
 
-Eggs were implemented using 1 half sphere. The top part was scaled so it would seem more less round than the bottom part, therefore forming a more realistic egg shape. 
-Nest was implemented by using a half sphere, however the half sphere had to be divided in two parts. The outside half sphere and the inside half sphere. By combining a default hide sphere with a modified half sphere just as the panoram sphere the egg texture would be visible on both outside and inside. 
-In addition, in order to implement the bird egg catch we added the fly and dive state (activated by pressing the Key "P"), which were responsible for monitoring the bird movement and handling it in a two second time span and making the movement liner on the XZ plane. 
-Finally, egg drop was implemented by adding a state drop, which would be activated as soon as the Key "O" as pressed. When the egg is close to the nest it is dropped and a position is assigned acording to a predefined position.
+Eggs were implemented using 2 half spheres, one on the top and another on the bottom. The top part was scaled to give an oval effect, contrasting with the bottom part, therefore forming a more realistic egg shape. 
+
+The nest was implemented by using a single half sphere. The half sphere is both visible on the outside and inside, using a double sided material. The nest texture was applied to to both sides.
+
+To implement the bird egg catch, we added a `dive`, a `fly` and a `drop` state:
+- `dive` - Activated by pressing the Key `P`, which was responsible for making the bird dive towards the egg, maintaining its original linear movement on the XZ place, picking it up if in a desirable range;
+- `fly` - Passively activated, after diving to the egg, which was responsible for making the bird fly up to the original position.
+- `drop` - Activated by pressing the Key `O`, which was responsible for making the bird drop the egg in the nest, if in a desirable range. The position of the egg in the nest is predefined, for the total amount of eggs already placed.
+
 
 ![Bird Eggs](screenshots/project-t05g05-4.png)
 
