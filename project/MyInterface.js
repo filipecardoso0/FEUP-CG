@@ -38,6 +38,7 @@ export class MyInterface extends CGFinterface {
 
         this.initKeys();
 
+        this.initKeys();
         return true;
     }
     initKeys() {
