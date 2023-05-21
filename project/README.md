@@ -137,3 +137,16 @@ To achieve this goal, we used a noise function, which is applied to the vertices
 We added a water texture to the scene, that covers all the lowerside of the terrain. This texture is applied to a plane, which is placed below the terrain, and is also animated, using a simple animation provinient from the TP5, which moves the texture in the X and Y axis, creating the illusion of movement. We also applied a wave and a tidal effect to it.
 
 ![Wave](screenshots/project-t05g05-7.png)
+
+---
+
+This project was made possible by:
+
+## Group T05G05
+| Name             | Number    | E-Mail             |
+| ---------------- | --------- | ------------------ |
+| João Paulo Moreira Araújo         | 202004293 | up202004293@edu.fe.up.pt                |
+| Alexandre Guimarães Gomes Correia          | 202007042 | up202007042@edu.fe.up.pt                |
+| Filipe de Azevedo Cardoso         | 202006409 | up202006409@edu.fe.up.pt                |
+| --- | --- | --- |
+| Group | T05G05 | |
