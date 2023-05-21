@@ -4,6 +4,7 @@ import { MyPanoram } from "./objects/MyPanoram.js";
 import { MyTreeGroupPatch } from "./objects/MyTreeGroupPatch.js";
 import { MyTreeRowPatch } from "./objects/MyTreeRowPatch.js";
 import { MyBird } from "./objects/3d/MyBird.js";
+import { MyWater } from "./objects/3d/MyWater.js";
 
 /**
  * MyScene
@@ -76,6 +77,10 @@ export class MyScene extends CGFscene {
     this.followBirdKey = false;
     this.followBirdB = false;
 
+    this.waterTex = new CGFtexture(this, "images/waterTex.jpg");
+    this.waterMap = new CGFtexture(this, "images/waterMap.jpg");
+    this.water = new MyWater(this, this.waterTex, this.waterMap);
+
     // set the scene update period 
 		// (to invoke the update() method every 50ms or as close as possible to that )
 		this.setUpdatePeriod(50);
@@ -129,6 +134,7 @@ export class MyScene extends CGFscene {
 
     this.checkKeys();
     this.bird.update(t, this.speedFactor);
+    this.water.update(t);
   }
   checkKeys() {
     var text = "Keys pressed: ";
@@ -226,6 +232,8 @@ export class MyScene extends CGFscene {
       this.panoram.display();
     
     this.terrain.display();
+
+    this.water.display();
 
     this.treeGroupPatch.display(this.groupPosX, -87.5, this.groupPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);
     this.treeRowPatch.display(this.rowPosX, -87.5, this.rowPosZ, this.treeSpacing, [this.windAngle, this.windStrength, this.isWind]);

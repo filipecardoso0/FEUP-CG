@@ -3,9 +3,9 @@
 
 # TODO LIST
 
-- [ ] Add size randomness to trees (Optional)
+- [ ] Add size randomness to trees (Optional) need to fix treePlane, ez fix
 - [ ] Fix bird animation, texture and shader
-- [ ] Add water shader (Optional)
+- [X] Add water shader (Optional)
 - [X] Add follow bird camera
 
 ## Objectives
