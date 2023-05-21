@@ -115,3 +115,7 @@ This is an example of the generation of a row of trees:
 
 From the possible aditional developments, we decided to implement the deformation of trees with the wind, based on the displacement of vertices of the respective
 quads.
+
+To achieve this goal, we used a noise function, which is applied to the vertices of the trees, in the vertex shader. This function is applied to the vertices, based on the time, which is incremented at each frame. This creates a wave-like movement, which is applied to the trees, as if they were being moved by the wind.
+
+![Wind](screenshots/project-t05g05-6.png)
